@@ -1,21 +1,18 @@
 package org.group.larryquestdefinitive;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
-import java.io.IOException;
+import org.group.larryquestdefinitive.scenes.TitlePage;
 
 public class Main extends Application {
     @Override
     public void start(Stage stage) {
         AnchorPane root = new AnchorPane();
-        Scene scene = new Scene(root, 1100, 600);
+        TitlePage title = new TitlePage(root, Constants.WIDTH, Constants.HEIGHT);
 
         stage.setTitle("Larry Quest: Definitive Edition");
-        stage.setScene(scene);
+        stage.setScene(title);
         stage.show();
     }
 
