@@ -13,6 +13,7 @@ public class Main extends Application {
 
         stage.setTitle("Larry Quest: Definitive Edition");
         stage.setScene(title);
+        stage.setResizable(false);
         stage.show();
     }
 
