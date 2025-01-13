@@ -75,36 +75,48 @@ public class MoveController {
     scene.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
         switch (event.getCode()) {
             case W:
+                /*
                 super.playerUpAnimation.stop();
                 if (lastAnimationWasUp) {
                     super.sprite.setImage(Up1);
                     lastAnimationWasUp = false;
                 }
                 wPressed = false;
+
+                 */
                 break;
             case A:
+                /*
                 super.playerLeftAnimation.stop();
                 if (lastAnimationWasLeft) {
                     super.sprite.setImage(Left1);
                     lastAnimationWasLeft = false;
                 }
                 aPressed = false;
+
+                 */
                 break;
             case S:
+                /*
                 super.playerDownAnimation.stop();
                 if (lastAnimationWasDown) {
                     super.sprite.setImage(Down1);
                     lastAnimationWasDown = false;
                 }
                 sPressed = false;
+
+                 */
                 break;
             case D:
+                /*
                 super.playerRightAnimation.stop();
                 if (lastAnimationWasRight) {
                     super.sprite.setImage(Right1);
                     lastAnimationWasRight = false;
                 }
                 dPressed = false;
+
+                 */
                 break;
 
             case SHIFT:
