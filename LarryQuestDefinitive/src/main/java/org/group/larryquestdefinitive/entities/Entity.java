@@ -12,10 +12,10 @@ public class Entity {
   protected double layoutX;
   protected double layoutY;
 
-  protected Timeline playerUpAnimation; 
-  protected Timeline playerLeftAnimation; 
-  protected Timeline playerDownAnimation;
-  protected Timeline playerRightAnimation;
+  protected Timeline UpAnimation; 
+  protected Timeline LeftAnimation; 
+  protected Timeline DownAnimation;
+  protected Timeline RightAnimation;
 
   public Entity(ImageView sprite, double x, double y,
                 Timeline UpAnimation, Timeline LeftAnimation, 
@@ -24,10 +24,10 @@ public class Entity {
     this.sprite = sprite;
     this.posX = x;
     this.posY = y;
-    this.playerUpAnimation = UpAnimation;
-    this.playerLeftAnimation = LeftAnimation;
-    this.playerDownAnimation = DownAnimation;
-    this.playerRightAnimation = RightAnimation;
+    this.UpAnimation = UpAnimation;
+    this.LeftAnimation = LeftAnimation;
+    this.DownAnimation = DownAnimation;
+    this.RightAnimation = RightAnimation;
   }
 
   public ImageView getSprite() {
