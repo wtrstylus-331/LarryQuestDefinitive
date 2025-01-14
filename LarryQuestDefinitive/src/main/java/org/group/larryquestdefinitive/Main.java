@@ -6,10 +6,13 @@ import javafx.stage.Stage;
 import org.group.larryquestdefinitive.scenes.TitlePage;
 
 public class Main extends Application {
+    // Static reference to global root for scene creation
+    public static AnchorPane root = new AnchorPane();
+
+    // Initialize the stage
     @Override
     public void start(Stage stage) {
-        AnchorPane root = new AnchorPane();
-        TitlePage title = new TitlePage(root, Constants.WIDTH, Constants.HEIGHT);
+        TitlePage title = new TitlePage(Main.root, Constants.WIDTH, Constants.HEIGHT);
 
         stage.setTitle("Larry Quest: Definitive Edition");
         stage.setScene(title);
@@ -17,7 +20,8 @@ public class Main extends Application {
         stage.show();
     }
 
+    // Run the program
     public static void main(String[] args) {
         launch();
     }
-}
+} // end of Main class

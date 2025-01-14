@@ -15,25 +15,25 @@ public class Player extends Entity{
             case Direction.UP:
                 // Start UpAnimation and update position
                 UpAnimation.play();
-                layoutY -= 1; // Adjust this value based on your game logic
+                //layoutY -= 1; // Adjust this value based on your game logic
                 break;
 
             case DOWN:
                 // Start DownAnimation and update position
                 DownAnimation.play();
-                layoutY += 1;
+                //layoutY += 1;
                 break;
 
             case LEFT:
                 // Start LeftAnimation and update position
                 LeftAnimation.play();
-                layoutX -= 1;
+                //layoutX -= 1;
                 break;
 
             case RIGHT:
                 // Start RightAnimation and update position
                 RightAnimation.play();
-                layoutX += 1;
+                //layoutX += 1;
                 break;
         }
     }
