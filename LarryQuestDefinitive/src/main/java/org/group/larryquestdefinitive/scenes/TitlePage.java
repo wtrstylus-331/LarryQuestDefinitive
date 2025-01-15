@@ -11,8 +11,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import org.group.larryquestdefinitive.Constants;
+import org.group.larryquestdefinitive.Main;
 
-public class TitlePage extends Scene {
+public class TitlePage extends Scene implements Constants {
     private AnchorPane parent;
     private Button button;
     private Text title;
@@ -66,6 +68,8 @@ public class TitlePage extends Scene {
 
         this.button.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             // set to intro scene or whatever
+            // temporary testing
+            Main.stage.setScene(new TestingScene(new AnchorPane(), WIDTH, HEIGHT));
         });
     }
 }
