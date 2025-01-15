@@ -20,6 +20,7 @@ public class CurrentScene extends Scene {
         this.parent = (AnchorPane) root;
         this.setMap(currentMap);
         this.addListener();
+        this.parent.getChildren().add(this.holderPane);
     }
 
     public void setMap(ImageView currentMap) {
