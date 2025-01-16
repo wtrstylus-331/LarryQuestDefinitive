@@ -1,18 +1,11 @@
 package org.group.larryquestdefinitive.scenes;
 
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import org.group.larryquestdefinitive.Main;
 import org.group.larryquestdefinitive.entities.Direction;
-import org.group.larryquestdefinitive.entities.PlayerPane;
 
 public class TestingScene extends Scene {
     private AnchorPane root;
@@ -20,13 +13,7 @@ public class TestingScene extends Scene {
     public TestingScene(Parent parent, double w, double h) {
         super(parent, w, h);
 
-        Text testing = new Text("placeholder text");
-        testing.setFont(Font.font("arial", FontWeight.NORMAL, FontPosture.REGULAR, 20));
-        testing.setX(100);
-        testing.setY(100);
-
         this.root = (AnchorPane) parent;
-        this.root.getChildren().add(testing);
         this.root.getChildren().add(Main.mainPlayer);
         this.addListener();
     }
