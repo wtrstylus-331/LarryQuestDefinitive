@@ -1,7 +1,6 @@
 package org.group.larryquestdefinitive.entities;
 
 import javafx.animation.Timeline;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import org.group.larryquestdefinitive.Main;
