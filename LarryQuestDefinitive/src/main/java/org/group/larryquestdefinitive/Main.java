@@ -9,6 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.group.larryquestdefinitive.entities.Direction;
+import org.group.larryquestdefinitive.entities.PlayerPane;
 import org.group.larryquestdefinitive.scenes.TitlePage;
 
 import java.util.ArrayList;
@@ -19,10 +20,10 @@ public class Main extends Application {
     public static Stage stage;
 
     // player sprite timelines
-    public static Timeline plrUp = initPlayerTimeline(Direction.UP);
-    public static Timeline plrDown = initPlayerTimeline(Direction.DOWN);
-    public static Timeline plrRight = initPlayerTimeline(Direction.RIGHT);
-    public static Timeline plrLeft = initPlayerTimeline(Direction.LEFT);
+    public static Timeline plrUp = initTimelines("up");
+    public static Timeline plrDown = initTimelines("down");
+    public static Timeline plrRight = initTimelines("right");
+    public static Timeline plrLeft = initTimelines("left");
 
     public static ImageView playerIdle = new ImageView(
             new Image(
@@ -30,12 +31,15 @@ public class Main extends Application {
             )
     );
 
+    public static PlayerPane mainPlayer;
+
     // Initialize the stage
     @Override
     public void start(Stage stage) {
         TitlePage title = new TitlePage(new AnchorPane(), Constants.WIDTH, Constants.HEIGHT);
-
         debugTimelines();
+
+        mainPlayer = new PlayerPane(playerIdle, 450, 300, plrUp, plrDown, plrLeft, plrRight);
 
         stage.setTitle("Larry Quest: Definitive Edition");
         stage.setScene(title);
@@ -49,33 +53,19 @@ public class Main extends Application {
         launch();
     }
 
-    // Returns timeline for specified direction for player
-    private static Timeline initPlayerTimeline(Direction dir) {
-        String dirSuffix = switch (dir) {
-            case DOWN -> "down";
-            case RIGHT -> "right";
-            case LEFT -> "left";
-            case UP -> "up";
-        };
-
-        List<Image> images = new ArrayList<>();
-        for (int i = 1; i <= 9; i++) {
-            images.add(new Image(Main.class.getResourceAsStream(
-                    "sprites/plr_" + dirSuffix + "/walk_" + dirSuffix + i + ".png")));
-        }
-
+    private static Timeline initTimelines(String type) {
         Timeline timeline = new Timeline();
-        for (int i = 0; i < images.size(); i++) {
+        timeline.setCycleCount(Timeline.INDEFINITE);
+
+        for (int i = 1; i <= 9; i++) {
             int index = i;
-            timeline.getKeyFrames().add(new KeyFrame(
-                    Duration.seconds(0.1 * i),
-                    event -> {
-                        playerIdle.setImage(images.get(index));
-                    }
-            ));
+            timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(0.1 * (i - 1)), e -> {
+                mainPlayer.setImage(new ImageView(new Image(
+                        Main.class.getResourceAsStream("sprites/plr_" + type + "/walk_" + type + index + ".png"))
+                ));
+            }));
         }
 
-        timeline.setCycleCount(Timeline.INDEFINITE);
         return timeline;
     }
 
