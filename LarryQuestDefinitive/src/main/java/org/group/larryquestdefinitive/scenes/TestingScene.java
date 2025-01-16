@@ -16,50 +16,41 @@ import org.group.larryquestdefinitive.entities.PlayerPane;
 
 public class TestingScene extends Scene {
     private AnchorPane root;
-    private PlayerPane testPlayer;
-    private Pane playerPane;
 
     public TestingScene(Parent parent, double w, double h) {
         super(parent, w, h);
-
-        this.playerPane = new Pane();
-        this.testPlayer = new PlayerPane(Main.playerIdle, 400, 250, Main.plrUp, Main.plrLeft, Main.plrDown, Main.plrRight);
 
         Text testing = new Text("placeholder text");
         testing.setFont(Font.font("arial", FontWeight.NORMAL, FontPosture.REGULAR, 20));
         testing.setX(100);
         testing.setY(100);
 
-        this.playerPane.getChildren().add(testPlayer);
-
         this.root = (AnchorPane) parent;
         this.root.getChildren().add(testing);
-        this.root.getChildren().add(playerPane);
+        this.root.getChildren().add(Main.mainPlayer);
         this.addListener();
     }
 
     public void addListener() {
         this.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+            Direction direction = null;
+
             switch (event.getCode()) {
-                case W:
-                    //this.map.setY(this.map.getY() + 1);
-                    testPlayer.playTimeline(Direction.UP);
-                case A:
-                    //this.map.setX(this.map.getX() - 1);
-                    testPlayer.playTimeline(Direction.LEFT);
-                case S:
-                    //this.map.setY(this.map.getY() - 1);
-                    testPlayer.playTimeline(Direction.DOWN);
-                case D:
-                    //this.map.setX(this.map.getX() + 1);
-                    testPlayer.playTimeline(Direction.RIGHT);
+                case W -> direction = Direction.UP;
+                case A -> direction = Direction.LEFT;
+                case S -> direction = Direction.DOWN;
+                case D -> direction = Direction.RIGHT;
+            }
+
+            if (direction != null) {
+                Main.mainPlayer.playAnimation(direction);
             }
         });
 
         this.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
-            switch (event.getCode()) {
-                case W, A, S, D -> testPlayer.stopTimelines();
-            }
+            // Stop all animations when any key is released
+            Main.mainPlayer.stopTimelines();
+            Main.mainPlayer.setImage(Main.playerIdle);
         });
     }
 }
