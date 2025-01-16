@@ -3,6 +3,8 @@ package org.group.larryquestdefinitive.scenes;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -27,6 +29,7 @@ public class TitlePage extends Scene implements Constants {
         this.addListener();
     }
 
+    // Method to add UI elements to the scene
     private void addElements() {
         this.title = new Text("Larry Quest: Definitive Edition");
         this.title.setFont(Font.font("arial", FontWeight.BOLD, FontPosture.REGULAR, 60));
@@ -47,8 +50,9 @@ public class TitlePage extends Scene implements Constants {
 
         this.parent.getChildren().add(this.title);
         this.parent.getChildren().add(this.button);
-    }
+    } // end of addElements method
 
+    // Method to add button event handlers to the buttons
     private void addListener() {
         this.button.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
             this.button.setFont(Font.font("arial", FontWeight.NORMAL, FontPosture.REGULAR, 50));
@@ -69,7 +73,14 @@ public class TitlePage extends Scene implements Constants {
         this.button.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             // set to intro scene or whatever
             // temporary testing
-            Main.stage.setScene(new TestingScene(new AnchorPane(), WIDTH, HEIGHT));
+            if (Main.debugMode) {
+                MapScene test = new MapScene(new AnchorPane(), WIDTH, HEIGHT);
+                test.setMap(new ImageView(new Image(Main.class.getResourceAsStream("scenes/debug_map.png"))), 900, 500);
+
+                test.addCollider(50,100,50,50);
+
+                Main.stage.setScene(test);
+            }
         });
-    }
-}
+    } // end of addListener method
+} // end of TitlePage class
