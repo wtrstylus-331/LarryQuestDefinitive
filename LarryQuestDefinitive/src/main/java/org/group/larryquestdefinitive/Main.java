@@ -38,7 +38,7 @@ public class Main extends Application {
         TitlePage title = new TitlePage(new AnchorPane(), Constants.WIDTH, Constants.HEIGHT);
         debugTimelines();
 
-        mainPlayer = new PlayerPane(playerIdle, 450, 300, plrUp, plrDown, plrLeft, plrRight);
+        mainPlayer = new PlayerPane(playerIdle, 460, 275, plrUp, plrDown, plrLeft, plrRight);
 
         stage.setTitle("Larry Quest: Definitive Edition");
         stage.setScene(title);
