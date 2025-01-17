@@ -77,7 +77,10 @@ public class TitlePage extends Scene implements Constants {
                 MapScene test = new MapScene(new AnchorPane(), WIDTH, HEIGHT);
                 test.setMap(new ImageView(new Image(Main.class.getResourceAsStream("scenes/debug_map.png"))), 900, 500);
 
-                test.addCollider(50,100,50,50);
+                test.addCollider(20,50,50,500);
+                test.addCollider(925,50,50,500);
+                test.addCollider(35,20,900,50);
+                test.addCollider(35,530,900,50);
 
                 Main.stage.setScene(test);
             }
