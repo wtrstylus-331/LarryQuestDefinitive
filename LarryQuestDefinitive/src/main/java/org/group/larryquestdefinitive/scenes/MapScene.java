@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import org.group.larryquestdefinitive.Constants;
 import org.group.larryquestdefinitive.Main;
+import org.group.larryquestdefinitive.control.Collider;
 import org.group.larryquestdefinitive.entities.Direction;
 
 import java.util.ArrayList;
@@ -20,12 +21,13 @@ public class MapScene extends Scene implements Constants {
     private Pane holderPane;
     private ImageView map;
     private AnimationTimer timer;
-    private ArrayList<Rectangle> collisionBoxes;
 
     private boolean movingRight = false;
     private boolean movingLeft = false;
     private boolean movingUp = false;
     private boolean movingDown = false;
+
+    public boolean playerColliding = false;
 
     public MapScene(Parent root, double w, double h) {
         super(root, w, h);
@@ -33,7 +35,6 @@ public class MapScene extends Scene implements Constants {
         this.parent = (AnchorPane) root;
 
         this.holderPane = new Pane();
-        this.collisionBoxes = new ArrayList<>();
         this.parent.getChildren().add(this.holderPane);
         this.parent.getChildren().add(Main.mainPlayer);
 
@@ -71,7 +72,7 @@ public class MapScene extends Scene implements Constants {
     }
 
     public void addCollider(int x, int y, int collisionW, int collisionH) {
-        Rectangle collider = createCollider(collisionW, collisionH);
+        Rectangle collider = createCollider(collisionW,collisionH);
         collider.setX(x);
         collider.setY(y);
 
@@ -79,16 +80,15 @@ public class MapScene extends Scene implements Constants {
     }
 
     private Rectangle createCollider(int w, int h) {
-        Rectangle col = new Rectangle();
-        col.setWidth(w);
-        col.setHeight(h);
+        Collider col = new Collider(w,h);
 
         if (Main.debugMode) {
-            col.setFill(Color.rgb(200,0,200, 0.7));
+            col.fill(Color.rgb(200,0,200, 0.7));
         } else {
-            col.setFill(Color.rgb(0,0,0,0));
+            col.fill(Color.rgb(0,0,0,0));
         }
 
+        //col.collide();
         return col;
     }
 
@@ -114,17 +114,19 @@ public class MapScene extends Scene implements Constants {
 
     private void addPlayerListener() {
         this.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
-            Direction direction = null;
+            if (!playerColliding) {
+                Direction direction = null;
 
-            switch (event.getCode()) {
-                case W -> direction = Direction.UP;
-                case A -> direction = Direction.LEFT;
-                case S -> direction = Direction.DOWN;
-                case D -> direction = Direction.RIGHT;
-            }
+                switch (event.getCode()) {
+                    case W -> direction = Direction.UP;
+                    case A -> direction = Direction.LEFT;
+                    case S -> direction = Direction.DOWN;
+                    case D -> direction = Direction.RIGHT;
+                }
 
-            if (direction != null) {
-                Main.mainPlayer.playAnimation(direction);
+                if (direction != null) {
+                    Main.mainPlayer.playAnimation(direction);
+                }
             }
         });
 
@@ -139,16 +141,40 @@ public class MapScene extends Scene implements Constants {
         this.timer = new AnimationTimer() {
             @Override
             public void handle(long l) {
-                if (movingRight) {
+                boolean canMoveRight = true;
+                boolean canMoveLeft = true;
+                boolean canMoveUp = true;
+                boolean canMoveDown = true;
+
+                // Check for collisions in each direction
+                for (var node : holderPane.getChildren()) {
+                    if (node instanceof Collider collider && collider.isColliding(Main.mainPlayer)) {
+                        if (movingRight && holderPane.getLayoutX() - 2 < collider.getTranslateX()) {
+                            canMoveRight = false;
+                        }
+                        if (movingLeft && holderPane.getLayoutX() + 2 > collider.getTranslateX()) {
+                            canMoveLeft = false;
+                        }
+                        if (movingUp && holderPane.getLayoutY() + 2 > collider.getTranslateY()) {
+                            canMoveUp = false;
+                        }
+                        if (movingDown && holderPane.getLayoutY() - 2 < collider.getTranslateY()) {
+                            canMoveDown = false;
+                        }
+                    }
+                }
+
+                // Move the map only if there's no collision in the current direction
+                if (movingRight && canMoveRight) {
                     holderPane.setLayoutX(holderPane.getLayoutX() - 2);
                 }
-                if (movingLeft) {
+                if (movingLeft && canMoveLeft) {
                     holderPane.setLayoutX(holderPane.getLayoutX() + 2);
                 }
-                if (movingUp) {
+                if (movingUp && canMoveUp) {
                     holderPane.setLayoutY(holderPane.getLayoutY() + 2);
                 }
-                if (movingDown) {
+                if (movingDown && canMoveDown) {
                     holderPane.setLayoutY(holderPane.getLayoutY() - 2);
                 }
             }
