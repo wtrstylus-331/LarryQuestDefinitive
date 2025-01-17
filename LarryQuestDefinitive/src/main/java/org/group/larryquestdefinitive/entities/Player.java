@@ -10,7 +10,7 @@ public class Player extends Entity{
         super(sprite, x, y, UpAnimation, LeftAnimation, DownAnimation, RightAnimation);
     }
 
-    public void Move(Direction dir) {
+    /*public void Move(Direction dir) {
         switch (dir) {
             case Direction.UP:
                 // Start UpAnimation and update position
@@ -36,6 +36,9 @@ public class Player extends Entity{
                 //layoutX += 1;
                 break;
         }
+    }*/
+    
+    public void Update(){
+        
     }
-
 }

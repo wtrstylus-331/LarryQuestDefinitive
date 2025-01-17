@@ -17,7 +17,7 @@ import org.group.larryquestdefinitive.Constants;
 import org.group.larryquestdefinitive.Main;
 
 public class TitlePage extends Scene implements Constants {
-    private AnchorPane parent;
+    public AnchorPane parent;
     private Button button;
     private Text title;
 

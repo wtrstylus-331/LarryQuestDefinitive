@@ -16,61 +16,49 @@ public class MoveController {
     private boolean shiftPressed = false;
 
     public MoveController(Player player){
-
+        this.player = player;
     }
 
-    public void setupInput(AnchorPane scene, Image Up1, Image Left1, Image Down1, Image Right1, Enemy enemy) {
-    scene.requestFocus();
-    
-    scene.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
-        switch (event.getCode()) {
-          case W:
-              
-              wPressed = true;
-              aPressed = false;
-              sPressed = false;
-              dPressed = false;
-              break;
-            
-          case A:
-              
-              wPressed = false;
-              aPressed = true;
-              sPressed = false;
-              dPressed = false;
-              break;
-            
-          case S:
-              
-              wPressed = false;
-              aPressed = false;
-              sPressed = true;
-              dPressed = false;
-              break;  
-            
-          case D:
-              
-              wPressed = false;
-              aPressed = false;
-              sPressed = false;
-              dPressed = true;
-              break;
+    public void setupInput(AnchorPane scene /*Image Up1, Image Left1, Image Down1, Image Right1, Enemy enemy*/) {
+        scene.requestFocus();
+        
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+            switch (event.getCode()) {
+                case W:
+                    System.out.print("up");
+                    player.Move(Direction.UP);
+                    break;
+                
+                case A:
+                    System.out.print("left");
+                    player.Move(Direction.LEFT);
+                    break;
+                
+                case S:
+                    System.out.print("down");
+                    player.Move(Direction.DOWN);
+                    break;
+                
+                case D:
+                    System.out.print("right");
+                    player.Move(Direction.RIGHT);
+                    break;
 
-          case SHIFT:
+            case SHIFT:
 
-              shiftPressed = true;
-              //last = System.nanoTime();
-              break;
+                shiftPressed = true;
+                //last = System.nanoTime();
+                break;
 
-          case G:
-              /*now5 = System.nanoTime();
-              if(now5 - last5 >= 200_000_000 && mana >= 20){
-                attack(enemy);
-                last5 = System.nanoTime();
-              }*/
-              break;
-        }
-    });
+            case G:
+                /*now5 = System.nanoTime();
+                if(now5 - last5 >= 200_000_000 && mana >= 20){
+                    attack(enemy);
+                    last5 = System.nanoTime();
+                }*/
+                break;
+            }
+        });
      
     scene.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
         switch (event.getCode()) {

@@ -18,6 +18,12 @@ public class Entity extends Pane{
   protected Timeline DownAnimation;
   protected Timeline RightAnimation;
 
+  protected Direction direction = Direction.UP;
+  protected boolean canMoveRight = true;
+  protected boolean canMoveLeft = true;
+  protected boolean canMoveUp = true;
+  protected boolean canMoveDown = true;
+
   public Entity(ImageView sprite, double x, double y,
                 Timeline UpAnimation, Timeline LeftAnimation, 
                 Timeline DownAnimation, Timeline RightAnimation) {
@@ -36,25 +42,25 @@ public class Entity extends Pane{
         case Direction.UP:
             // Start UpAnimation and update position
             UpAnimation.play();
-            layoutY -= 1; // Adjust this value based on your game logic
+            if(canMoveUp) posY -= 1; // Adjust this value based on your game logic
             break;
 
         case DOWN:
             // Start DownAnimation and update position
             DownAnimation.play();
-            layoutY += 1;
+            if(canMoveDown) posY += 1;
             break;
 
         case LEFT:
             // Start LeftAnimation and update position
             LeftAnimation.play();
-            layoutX -= 1;
+            if(canMoveLeft) posX -= 1;
             break;
 
         case RIGHT:
             // Start RightAnimation and update position
             RightAnimation.play();
-            layoutX += 1;
+            if(canMoveRight) posX += 1;
             break;
     }
 }
@@ -82,5 +88,36 @@ public class Entity extends Pane{
 
   public void setPositionY(double y) {
     this.posY = y;
+  }
+
+  public Direction getDirection(){
+    return direction;
+  }
+
+  public void setDirection(Direction dir){
+    direction = dir;
+  }
+
+  public void setPossibleMove(Direction dir, boolean possible){
+    switch (dir) {
+      case UP:
+        canMoveUp = possible;
+        break;
+      case DOWN:
+        canMoveDown = possible;
+        break;
+      case LEFT:
+        canMoveLeft = possible;
+        break;
+      case RIGHT:
+        canMoveRight = possible;
+        break;
+      case ALL:
+        canMoveUp = possible;
+        canMoveDown = possible;
+        canMoveLeft = possible;
+        canMoveRight = possible;
+        break;
+    }
   }
 }

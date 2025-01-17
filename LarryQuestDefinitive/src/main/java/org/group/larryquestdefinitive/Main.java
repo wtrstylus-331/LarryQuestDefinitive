@@ -3,12 +3,18 @@ package org.group.larryquestdefinitive;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import org.group.larryquestdefinitive.control.GameLoop;
+import org.group.larryquestdefinitive.control.MoveController;
+import org.group.larryquestdefinitive.entities.Player;
 import org.group.larryquestdefinitive.entities.PlayerPane;
+import org.group.larryquestdefinitive.scenes.GameScene;
 import org.group.larryquestdefinitive.scenes.TitlePage;
 
 public class Main extends Application {
@@ -35,7 +41,10 @@ public class Main extends Application {
     // Initialize the stage
     @Override
     public void start(Stage stage) {
-        TitlePage title = new TitlePage(new AnchorPane(), Constants.WIDTH, Constants.HEIGHT);
+        /*TitlePage title = new TitlePage(new AnchorPane(), Constants.WIDTH, Constants.HEIGHT);
+        Player player = new Player(playerIdle, 0, 0, plrUp, plrLeft, plrDown, plrRight);
+        MoveController mc = new MoveController(player);
+        mc.setupInput(title.parent);
         debugTimelines();
 
         mainPlayer = new PlayerPane(playerIdle, 460, 275, plrUp, plrDown, plrLeft, plrRight);
@@ -44,7 +53,19 @@ public class Main extends Application {
         stage.setScene(title);
         stage.setResizable(false);
         stage.show();
-        Main.stage = stage;
+        Main.stage = stage;*/
+
+        Player player = new Player(playerIdle, 0, 0, plrUp, plrLeft, plrDown, plrRight);
+        GameScene startScene = new GameScene();
+        Scene playScene = new Scene(startScene, Constants.WIDTH, Constants.HEIGHT);
+        Game game = new Game(player, playScene);
+        GameLoop loop = new GameLoop(game);
+        
+        stage.setTitle("Larry Quest: Definitive Edition");
+        stage.setScene(playScene);
+        stage.setResizable(false);
+        stage.show();
+        loop.start();
     }
 
     // Run the program
