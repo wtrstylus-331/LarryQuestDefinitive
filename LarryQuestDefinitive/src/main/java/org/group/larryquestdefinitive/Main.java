@@ -33,6 +33,8 @@ public class Main extends Application {
             )
     );
 
+    public static Image playerVis = new Image(Main.class.getResourceAsStream("sprites/plr_idle.png"));
+
     // Static reference to player
     public static PlayerPane mainPlayer;
 
@@ -55,10 +57,11 @@ public class Main extends Application {
         stage.show();
         Main.stage = stage;*/
 
-        Player player = new Player(playerIdle, 0, 0, plrUp, plrLeft, plrDown, plrRight);
+        Player player = new Player(playerVis, 0, 0, plrUp, plrLeft, plrDown, plrRight);
         GameScene startScene = new GameScene();
         Scene playScene = new Scene(startScene, Constants.WIDTH, Constants.HEIGHT);
         Game game = new Game(player, playScene);
+        game.setScene(startScene);
         GameLoop loop = new GameLoop(game);
         
         stage.setTitle("Larry Quest: Definitive Edition");

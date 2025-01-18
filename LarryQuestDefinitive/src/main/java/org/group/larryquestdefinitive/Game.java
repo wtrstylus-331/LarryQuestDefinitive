@@ -34,6 +34,8 @@ public class Game {
 
     public void setScene(GameScene scene){
         currScene = scene;
+        currScene.getChildren().add(player);
+        mc.setupInput(currScene);
         playScene.setRoot(scene);
     }
 }

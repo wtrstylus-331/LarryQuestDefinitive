@@ -24,11 +24,12 @@ public class Entity extends Pane{
   protected boolean canMoveUp = true;
   protected boolean canMoveDown = true;
 
-  public Entity(ImageView sprite, double x, double y,
+  public Entity(Image sprite, double x, double y,
                 Timeline UpAnimation, Timeline LeftAnimation, 
                 Timeline DownAnimation, Timeline RightAnimation) {
 
-    this.sprite = sprite;
+    this.sprite = new ImageView(sprite);
+    super.getChildren().add(this.sprite);
     this.posX = x;
     this.posY = y;
     this.UpAnimation = UpAnimation;
@@ -41,26 +42,26 @@ public class Entity extends Pane{
     switch (dir) {
         case Direction.UP:
             // Start UpAnimation and update position
-            UpAnimation.play();
-            if(canMoveUp) posY -= 1; // Adjust this value based on your game logic
+            //UpAnimation.play();
+            if(canMoveUp) posY -= 5; // Adjust this value based on your game logic
             break;
 
         case DOWN:
             // Start DownAnimation and update position
-            DownAnimation.play();
-            if(canMoveDown) posY += 1;
+            //DownAnimation.play();
+            if(canMoveDown) posY += 5;
             break;
 
         case LEFT:
             // Start LeftAnimation and update position
-            LeftAnimation.play();
-            if(canMoveLeft) posX -= 1;
+            //LeftAnimation.play();
+            if(canMoveLeft) posX -= 5;
             break;
 
         case RIGHT:
             // Start RightAnimation and update position
-            RightAnimation.play();
-            if(canMoveRight) posX += 1;
+            //RightAnimation.play();
+            if(canMoveRight) posX += 5;
             break;
     }
 }

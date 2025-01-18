@@ -4,7 +4,7 @@ import javafx.scene.image.*;
 import javafx.animation.*;
 
 public class Player extends Entity{
-    public Player(ImageView sprite, double x, double y,
+    public Player(Image sprite, double x, double y,
                 Timeline UpAnimation, Timeline LeftAnimation, 
                 Timeline DownAnimation, Timeline RightAnimation){
         super(sprite, x, y, UpAnimation, LeftAnimation, DownAnimation, RightAnimation);

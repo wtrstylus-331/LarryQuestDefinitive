@@ -13,6 +13,7 @@ public class GameLoop extends AnimationTimer{
 
     public GameLoop(Game game){
         this.game = game;
+        entities = new ArrayList<>();
     }
 
     public void handle(long now){

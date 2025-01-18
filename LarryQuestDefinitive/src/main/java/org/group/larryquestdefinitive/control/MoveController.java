@@ -25,22 +25,22 @@ public class MoveController {
         scene.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             switch (event.getCode()) {
                 case W:
-                    System.out.print("up");
+                    //System.out.print("up");
                     player.Move(Direction.UP);
                     break;
                 
                 case A:
-                    System.out.print("left");
+                    //System.out.print("left");
                     player.Move(Direction.LEFT);
                     break;
                 
                 case S:
-                    System.out.print("down");
+                    //System.out.print("down");
                     player.Move(Direction.DOWN);
                     break;
                 
                 case D:
-                    System.out.print("right");
+                    //System.out.print("right");
                     player.Move(Direction.RIGHT);
                     break;
 
