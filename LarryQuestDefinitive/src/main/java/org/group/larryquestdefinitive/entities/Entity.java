@@ -149,7 +149,6 @@ public class Entity extends Pane{
     setLayoutX(layoutX);
     setLayoutY(layoutY);
 
-    System.out.println(canMoveLeft);
     if(movingUp && canMoveUp) posY -= 10; // Adjust this value based on your game logic
     if(movingDown && canMoveDown) posY += 10; // Adjust this value based on your game logic
     if(movingLeft && canMoveLeft) posX -= 10; // Adjust this value based on your game logic

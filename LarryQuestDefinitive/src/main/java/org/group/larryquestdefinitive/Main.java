@@ -15,6 +15,7 @@ import org.group.larryquestdefinitive.control.MoveController;
 import org.group.larryquestdefinitive.entities.Player;
 import org.group.larryquestdefinitive.entities.PlayerPane;
 import org.group.larryquestdefinitive.scenes.GameScene;
+import org.group.larryquestdefinitive.scenes.Map;
 import org.group.larryquestdefinitive.scenes.TitlePage;
 
 public class Main extends Application {
@@ -64,10 +65,15 @@ public class Main extends Application {
         Game game = new Game(player, playScene);
         //game.setScene(startScene);
         GameLoop loop = new GameLoop(game);
-        TitlePage title = new TitlePage(new AnchorPane(), Constants.WIDTH, Constants.HEIGHT, game, loop);
+        //TitlePage title = new TitlePage(new AnchorPane(), Constants.WIDTH, Constants.HEIGHT, game, loop);
+        Map map = new Map();
+        Scene scene = new Scene(map, 600, 400);
+        stage.setScene(scene);
+        
+
         
         stage.setTitle("Larry Quest: Definitive Edition");
-        stage.setScene(title);
+        //stage.setScene(title);
         stage.setResizable(false);
         stage.show();
         Main.stage = stage;
