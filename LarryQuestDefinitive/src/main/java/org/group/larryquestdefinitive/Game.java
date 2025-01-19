@@ -32,10 +32,19 @@ public class Game {
         return currScene;
     }
 
+    public Scene getScene(){
+        return playScene;
+    }
+
     public void setScene(GameScene scene){
         currScene = scene;
         currScene.getChildren().add(player);
-        mc.setupInput(currScene);
         playScene.setRoot(scene);
+        mc.setupInput(currScene);
     }
+
+    public void checkCollision(){
+        cd.checkCollision(player, currScene.getHolder());
+    }
+    
 }

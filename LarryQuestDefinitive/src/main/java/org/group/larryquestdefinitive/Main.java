@@ -57,18 +57,21 @@ public class Main extends Application {
         stage.show();
         Main.stage = stage;*/
 
-        Player player = new Player(playerVis, 0, 0, plrUp, plrLeft, plrDown, plrRight);
+        
+        Player player = new Player(playerVis, 0, 0, "player");
         GameScene startScene = new GameScene();
         Scene playScene = new Scene(startScene, Constants.WIDTH, Constants.HEIGHT);
         Game game = new Game(player, playScene);
-        game.setScene(startScene);
+        //game.setScene(startScene);
         GameLoop loop = new GameLoop(game);
+        TitlePage title = new TitlePage(new AnchorPane(), Constants.WIDTH, Constants.HEIGHT, game, loop);
         
         stage.setTitle("Larry Quest: Definitive Edition");
-        stage.setScene(playScene);
+        stage.setScene(title);
         stage.setResizable(false);
         stage.show();
-        loop.start();
+        Main.stage = stage;
+        //loop.start();
     }
 
     // Run the program

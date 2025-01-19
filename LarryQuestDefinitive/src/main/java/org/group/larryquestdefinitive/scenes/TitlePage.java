@@ -14,16 +14,22 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import org.group.larryquestdefinitive.Constants;
+import org.group.larryquestdefinitive.Game;
 import org.group.larryquestdefinitive.Main;
+import org.group.larryquestdefinitive.control.GameLoop;
 
 public class TitlePage extends Scene implements Constants {
     public AnchorPane parent;
     private Button button;
     private Text title;
+    private Game game;
+    private GameLoop loop;
 
-    public TitlePage(Parent root, double w, double h) {
+    public TitlePage(Parent root, double w, double h, Game game, GameLoop loop) {
         super(root, w, h);
         this.parent = (AnchorPane) root;
+        this.game = game;
+        this.loop = loop;
 
         this.addElements();
         this.addListener();
@@ -74,7 +80,7 @@ public class TitlePage extends Scene implements Constants {
             // set to intro scene or whatever
             // temporary testing
             if (Main.debugMode) {
-                MapScene test = new MapScene(new AnchorPane(), WIDTH, HEIGHT);
+                GameScene test = new GameScene();
                 test.setMap(new ImageView(new Image(Main.class.getResourceAsStream("scenes/debug_map.png"))), 900, 500);
 
                 test.addCollider(20,50,50,500);
@@ -82,7 +88,10 @@ public class TitlePage extends Scene implements Constants {
                 test.addCollider(35,20,900,50);
                 test.addCollider(35,530,900,50);
 
-                Main.stage.setScene(test);
+                
+                Main.stage.setScene(game.getScene());
+                game.setScene(test);
+                loop.start();
             }
         });
     } // end of addListener method

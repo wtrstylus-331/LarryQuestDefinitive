@@ -2,6 +2,11 @@ package org.group.larryquestdefinitive.entities;
 
 import javafx.scene.image.*;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
+
+import org.group.larryquestdefinitive.Constants;
+import org.group.larryquestdefinitive.Main;
+
 import javafx.animation.*;
 
 public class Entity extends Pane{
@@ -18,57 +23,137 @@ public class Entity extends Pane{
   protected Timeline DownAnimation;
   protected Timeline RightAnimation;
 
+  protected Image idleUp;
+  protected Image idleDown;
+  protected Image idleLeft;
+  protected Image idleRight;
+
   protected Direction direction = Direction.UP;
   protected boolean canMoveRight = true;
   protected boolean canMoveLeft = true;
   protected boolean canMoveUp = true;
   protected boolean canMoveDown = true;
 
-  public Entity(Image sprite, double x, double y,
-                Timeline UpAnimation, Timeline LeftAnimation, 
-                Timeline DownAnimation, Timeline RightAnimation) {
+  protected boolean movingUp = false;
+  protected boolean movingDown = false;
+  protected boolean movingLeft = false;
+  protected boolean movingRight = false;
+
+  public Entity(Image sprite, double x, double y, String animType) {
 
     this.sprite = new ImageView(sprite);
     super.getChildren().add(this.sprite);
     this.posX = x;
     this.posY = y;
-    this.UpAnimation = UpAnimation;
-    this.LeftAnimation = LeftAnimation;
-    this.DownAnimation = DownAnimation;
-    this.RightAnimation = RightAnimation;
+    this.UpAnimation = initTimelines(animType, "up");
+    this.LeftAnimation = initTimelines(animType, "left");
+    this.DownAnimation = initTimelines(animType, "down");
+    this.RightAnimation = initTimelines(animType, "right");
+
+    idleUp = getIdle(animType, "up");
+    idleDown = getIdle(animType, "down");
+    idleLeft = getIdle(animType, "left");
+    idleRight = getIdle(animType, "right");
   }
 
   public void Move(Direction dir) {
     switch (dir) {
         case Direction.UP:
             // Start UpAnimation and update position
-            //UpAnimation.play();
-            if(canMoveUp) posY -= 5; // Adjust this value based on your game logic
+            if(!movingUp){
+              DownAnimation.stop();
+              LeftAnimation.stop();
+              RightAnimation.stop();
+
+              setImage(idleUp);
+              UpAnimation.play();
+            }
+            movingUp = true;
+
+            movingDown = false;
+            movingLeft = false;
+            movingRight = false;
             break;
 
         case DOWN:
             // Start DownAnimation and update position
-            //DownAnimation.play();
-            if(canMoveDown) posY += 5;
+            if(!movingDown){
+              UpAnimation.stop();
+              LeftAnimation.stop();
+              RightAnimation.stop();
+
+              setImage(idleDown);
+              DownAnimation.play();
+            }
+            movingDown = true;
+
+            movingUp = false;
+            movingLeft = false;
+            movingRight = false;
             break;
 
         case LEFT:
             // Start LeftAnimation and update position
-            //LeftAnimation.play();
-            if(canMoveLeft) posX -= 5;
+            if(!movingLeft){
+              UpAnimation.stop();
+              DownAnimation.stop();
+              RightAnimation.stop();
+              
+              setImage(idleLeft);
+              LeftAnimation.play();
+            }
+            movingLeft = true;
+
+            movingUp = false;
+            movingDown = false;
+            movingRight = false;
             break;
 
         case RIGHT:
             // Start RightAnimation and update position
-            //RightAnimation.play();
-            if(canMoveRight) posX += 5;
+            if(!movingRight){
+              UpAnimation.stop();
+              DownAnimation.stop();
+              LeftAnimation.stop();
+              
+              setImage(idleRight);
+              RightAnimation.play();
+            }
+            movingRight = true;
+
+            movingUp = false;
+            movingDown = false;
+            movingLeft = false;
             break;
     }
-}
+  }
+
+  public void Stop(){
+    UpAnimation.stop();
+    DownAnimation.stop();
+    LeftAnimation.stop();
+    RightAnimation.stop();
+
+    if(movingUp) setImage(idleUp);
+    if(movingDown) setImage(idleDown);
+    if(movingLeft) setImage(idleLeft);
+    if(movingRight) setImage(idleRight);
+
+    movingUp = false;
+    movingDown = false;
+    movingLeft = false;
+    movingRight = false;
+  }
 
   public void Update() {
     setLayoutX(layoutX);
     setLayoutY(layoutY);
+
+    System.out.println(canMoveLeft);
+    if(movingUp && canMoveUp) posY -= 10; // Adjust this value based on your game logic
+    if(movingDown && canMoveDown) posY += 10; // Adjust this value based on your game logic
+    if(movingLeft && canMoveLeft) posX -= 10; // Adjust this value based on your game logic
+    if(movingRight && canMoveRight) posX += 10; // Adjust this value based on your game logic
   }
 
   public ImageView getSprite() {
@@ -120,5 +205,29 @@ public class Entity extends Pane{
         canMoveRight = possible;
         break;
     }
+  }
+
+  public void setImage(Image image){
+    this.sprite.setImage(image);
+  }
+
+  private Timeline initTimelines(String type, String dir) {
+        Timeline timeline = new Timeline();
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        for (int i = 1; i <= 9; i++) {
+            i = i == 1 ? 2 : i;
+            int index = i;
+            timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(0.1 * (i - 1)), e -> {
+                setImage(new Image(
+                        Main.class.getResourceAsStream("sprites/" + type + "/" + dir + "/walk_" + dir + index + ".png"))
+                );
+            }));
+        }
+
+        return timeline;
+    } // end of initTimelines method
+
+  private Image getIdle(String type, String dir){
+    return new Image(Main.class.getResourceAsStream("sprites/" + type + "/" + dir + "/walk_" + dir + 1 + ".png"));
   }
 }

@@ -61,6 +61,7 @@ public class MoveController {
         });
      
     scene.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
+        //System.out.println("Released");
         switch (event.getCode()) {
             case W:
                 /*
@@ -72,6 +73,7 @@ public class MoveController {
                 wPressed = false;
 
                  */
+                player.Stop();
                 break;
             case A:
                 /*
@@ -83,6 +85,7 @@ public class MoveController {
                 aPressed = false;
 
                  */
+                player.Stop();
                 break;
             case S:
                 /*
@@ -94,6 +97,7 @@ public class MoveController {
                 sPressed = false;
 
                  */
+                player.Stop();
                 break;
             case D:
                 /*
@@ -105,6 +109,7 @@ public class MoveController {
                 dPressed = false;
 
                  */
+                player.Stop();
                 break;
 
             case SHIFT:

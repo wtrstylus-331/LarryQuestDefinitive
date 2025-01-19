@@ -1,13 +1,16 @@
 package org.group.larryquestdefinitive.entities;
 
 import javafx.scene.image.*;
+
+import org.group.larryquestdefinitive.Constants;
+
 import javafx.animation.*;
 
 public class Player extends Entity{
-    public Player(Image sprite, double x, double y,
-                Timeline UpAnimation, Timeline LeftAnimation, 
-                Timeline DownAnimation, Timeline RightAnimation){
-        super(sprite, x, y, UpAnimation, LeftAnimation, DownAnimation, RightAnimation);
+    public Player(Image sprite, double x, double y, String animType){
+        super(sprite, x, y, animType);
+        this.layoutX = Constants.WIDTH / 2;
+        this.layoutY = Constants.HEIGHT / 2;
     }
 
     /*public void Move(Direction dir) {
@@ -38,7 +41,7 @@ public class Player extends Entity{
         }
     }*/
     
-    public void Update(){
+    /*public void Update(){
         
-    }
+    }*/
 }

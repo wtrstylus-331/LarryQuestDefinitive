@@ -9,6 +9,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 import org.group.larryquestdefinitive.Constants;
+import org.group.larryquestdefinitive.Main;
+import org.group.larryquestdefinitive.control.Collider;
 
 public class GameScene extends AnchorPane {
     private Pane holderPane;
@@ -17,7 +19,7 @@ public class GameScene extends AnchorPane {
     public GameScene(){
         holderPane = new Pane();
         Rectangle rect = new Rectangle(500, 500);
-        holderPane.getChildren().add(rect);
+        //holderPane.getChildren().add(rect);
 
         this.getChildren().add(holderPane);
     }
@@ -39,5 +41,44 @@ public class GameScene extends AnchorPane {
         this.map.setY(centerY);
 
         this.holderPane.getChildren().add(this.map);
+    }
+
+    public void addObject(ImageView object, int x, int y, int w, int h, int collisionW, int collisionH, int xOffset, int yOffset) {
+        object.setFitWidth(w);
+        object.setFitHeight(h);
+        object.setX(x);
+        object.setY(y);
+
+        Rectangle collider = createCollider(collisionW, collisionH);
+        collider.setX(x + xOffset);
+        collider.setY(y + yOffset);
+
+        this.holderPane.getChildren().add(object);
+        this.holderPane.getChildren().add(collider);
+    }
+
+    public void addCollider(int x, int y, int collisionW, int collisionH) {
+        Rectangle collider = createCollider(collisionW,collisionH);
+        collider.setX(x);
+        collider.setY(y);
+
+        this.holderPane.getChildren().add(collider);
+    }
+
+    private Rectangle createCollider(int w, int h) {
+        Collider col = new Collider(w,h);
+
+        if (Main.debugMode) {
+            col.fill(Color.rgb(200,0,200, 0.7));
+        } else {
+            col.fill(Color.rgb(0,0,0,0));
+        }
+
+        //col.collide();
+        return col;
+    }
+
+    public Pane getHolder(){
+        return holderPane;
     }
 }
