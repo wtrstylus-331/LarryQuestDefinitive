@@ -2,6 +2,8 @@ package org.group.larryquestdefinitive.entities;
 
 import javafx.scene.image.*;
 
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import org.group.larryquestdefinitive.Constants;
 
 import javafx.animation.*;
@@ -11,6 +13,9 @@ public class Player extends Entity{
         super(sprite, x, y, animType);
         this.layoutX = Constants.WIDTH / 2;
         this.layoutY = Constants.HEIGHT / 2;
+        Rectangle rect = new Rectangle(0,0,sprite.getWidth(), sprite.getHeight());
+        rect.setFill(Color.RED);
+        super.getChildren().add(0,rect);
     }
 
     /*public void Move(Direction dir) {

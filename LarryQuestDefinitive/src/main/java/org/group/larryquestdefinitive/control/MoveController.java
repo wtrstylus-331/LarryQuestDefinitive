@@ -21,103 +21,78 @@ public class MoveController {
 
     public void setupInput(AnchorPane scene /*Image Up1, Image Left1, Image Down1, Image Right1, Enemy enemy*/) {
         scene.requestFocus();
-        
+
         scene.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             switch (event.getCode()) {
                 case W:
-                    //System.out.print("up");
-                    player.Move(Direction.UP);
+                    if (!wPressed) {
+                        wPressed = true;
+                        player.Move(Direction.UP);
+                    }
                     break;
-                
+
                 case A:
-                    //System.out.print("left");
-                    player.Move(Direction.LEFT);
+                    if (!aPressed) {
+                        aPressed = true;
+                        player.Move(Direction.LEFT);
+                    }
                     break;
-                
+
                 case S:
-                    //System.out.print("down");
-                    player.Move(Direction.DOWN);
+                    if (!sPressed) {
+                        sPressed = true;
+                        player.Move(Direction.DOWN);
+                    }
                     break;
-                
+
                 case D:
-                    //System.out.print("right");
-                    player.Move(Direction.RIGHT);
+                    if (!dPressed) {
+                        dPressed = true;
+                        player.Move(Direction.RIGHT);
+                    }
                     break;
 
-            case SHIFT:
+                case SHIFT:
+                    shiftPressed = true;
+                    break;
 
-                shiftPressed = true;
-                //last = System.nanoTime();
-                break;
-
-            case G:
-                /*now5 = System.nanoTime();
-                if(now5 - last5 >= 200_000_000 && mana >= 20){
-                    attack(enemy);
-                    last5 = System.nanoTime();
-                }*/
-                break;
+                case G:
+                    break;
             }
         });
-     
-    scene.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
-        //System.out.println("Released");
-        switch (event.getCode()) {
-            case W:
-                /*
-                super.playerUpAnimation.stop();
-                if (lastAnimationWasUp) {
-                    super.sprite.setImage(Up1);
-                    lastAnimationWasUp = false;
-                }
-                wPressed = false;
 
-                 */
-                player.Stop();
-                break;
-            case A:
-                /*
-                super.playerLeftAnimation.stop();
-                if (lastAnimationWasLeft) {
-                    super.sprite.setImage(Left1);
-                    lastAnimationWasLeft = false;
-                }
-                aPressed = false;
+        scene.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
+            switch (event.getCode()) {
+                case W:
+                    wPressed = false;
+                    if (!aPressed && !sPressed && !dPressed) {
+                        player.Stop(); // Stop only if no other key is pressed
+                    }
+                    break;
+                case A:
+                    aPressed = false;
+                    if (!wPressed && !sPressed && !dPressed) {
+                        player.Stop();
+                    }
+                    break;
+                case S:
+                    sPressed = false;
+                    if (!wPressed && !aPressed && !dPressed) {
+                        player.Stop();
+                    }
+                    break;
+                case D:
+                    dPressed = false;
+                    if (!wPressed && !aPressed && !sPressed) {
+                        player.Stop();
+                    }
+                    break;
 
-                 */
-                player.Stop();
-                break;
-            case S:
-                /*
-                super.playerDownAnimation.stop();
-                if (lastAnimationWasDown) {
-                    super.sprite.setImage(Down1);
-                    lastAnimationWasDown = false;
-                }
-                sPressed = false;
+                case SHIFT:
+                    break;
 
-                 */
-                player.Stop();
-                break;
-            case D:
-                /*
-                super.playerRightAnimation.stop();
-                if (lastAnimationWasRight) {
-                    super.sprite.setImage(Right1);
-                    lastAnimationWasRight = false;
-                }
-                dPressed = false;
-
-                 */
-                player.Stop();
-                break;
-
-            case SHIFT:
-
-                break;
-
-            case G:
-                break;
+                case G:
+                    break;
             }
         });
     }

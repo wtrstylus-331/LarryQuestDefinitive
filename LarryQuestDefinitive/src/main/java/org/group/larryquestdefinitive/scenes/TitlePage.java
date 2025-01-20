@@ -81,13 +81,13 @@ public class TitlePage extends Scene implements Constants {
             // temporary testing
             if (Main.debugMode) {
                 GameScene test = new GameScene();
-                test.setMap(new ImageView(new Image(Main.class.getResourceAsStream("scenes/debug_map.png"))), 900, 500);
+                test.setMap(new ImageView(new Image(Main.class.getResourceAsStream("scenes/Level2.png"))), 900, 500);
 
-                test.addCollider(20,50,50,500);
+                /*test.addCollider(20,50,50,500);
                 test.addCollider(925,50,50,500);
                 test.addCollider(35,20,900,50);
                 test.addCollider(35,530,900,50);
-
+                   */
                 
                 Main.stage.setScene(game.getScene());
                 game.setScene(test);
