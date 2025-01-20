@@ -18,9 +18,9 @@ public class Map extends Pane {
         this.setStyle("-fx-background-color: #2a2a2a;");
 
         // Add levels to the map
-        createLevel(50, 50, "level1.png", "Level 1");
-        createLevel(200, 50, "level2.png", "Level 2");
-        createLevel(350, 50, "level3.png", "Level 3");
+        createLevel(50, 50, "level1_thumbnail.png", "Level 1");
+        createLevel(200, 50, "level2_thumbnail.png", "Level 2");
+        createLevel(350, 50, "level3_thumbnail.png", "Level 3");
     }
 
     private void createLevel(double x, double y, String imagePath, String levelName) {

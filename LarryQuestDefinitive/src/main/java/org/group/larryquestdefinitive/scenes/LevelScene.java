@@ -14,9 +14,7 @@ import org.group.larryquestdefinitive.Main;
 import org.group.larryquestdefinitive.control.Collider;
 import org.group.larryquestdefinitive.entities.Direction;
 
-import java.util.ArrayList;
-
-public class MapScene extends Scene implements Constants {
+public class LevelScene extends Scene implements Constants {
     private AnchorPane parent;
     private Pane holderPane;
     private ImageView map;
@@ -29,7 +27,7 @@ public class MapScene extends Scene implements Constants {
 
     public boolean playerColliding = false;
 
-    public MapScene(Parent root, double w, double h) {
+    public LevelScene(Parent root, double w, double h) {
         super(root, w, h);
         super.setFill(Color.GRAY);
         this.parent = (AnchorPane) root;
