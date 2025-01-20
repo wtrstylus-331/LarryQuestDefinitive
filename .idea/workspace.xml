@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3f807991-b67b-46ea-85ab-2561d9626699" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/LarryQuestDefinitive/src/main/java/org/group/larryquestdefinitive/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/LarryQuestDefinitive/src/main/java/org/group/larryquestdefinitive/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LarryQuestDefinitive/src/main/java/org/group/larryquestdefinitive/entities/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/LarryQuestDefinitive/src/main/java/org/group/larryquestdefinitive/entities/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LarryQuestDefinitive/src/main/java/org/group/larryquestdefinitive/scenes/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/LarryQuestDefinitive/src/main/java/org/group/larryquestdefinitive/scenes/GameScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LarryQuestDefinitive/src/main/java/org/group/larryquestdefinitive/scenes/TitlePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/LarryQuestDefinitive/src/main/java/org/group/larryquestdefinitive/scenes/TitlePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LarryQuestDefinitive/src/main/java/org/group/larryquestdefinitive/entities/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/LarryQuestDefinitive/src/main/java/org/group/larryquestdefinitive/entities/Enemy.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,17 +34,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "Application.main.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Evan/Documents/GitHub/LarryQuestDefinitive"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Evan/Documents/GitHub/LarryQuestDefinitive&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="org.group.larryquestdefinitive.Main" />
@@ -66,5 +64,28 @@
       <updated>1737380436057</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-field">
+          <url>file://$PROJECT_DIR$/LarryQuestDefinitive/src/main/java/org/group/larryquestdefinitive/entities/Entity.java</url>
+          <line>15</line>
+          <properties field="posX" class="org.group.larryquestdefinitive.entities.Entity" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
