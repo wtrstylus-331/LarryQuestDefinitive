@@ -4,12 +4,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-public class Weapon extends Pane {
-    private ImageView sprite;
+public class Weapon extends ImageView {
 
     public Weapon(Image image) {
-        super();
-
-        this.sprite = new ImageView(image);
+        super(image);
     }
 }

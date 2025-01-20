@@ -41,8 +41,8 @@ public class GameScene extends AnchorPane {
 
         this.map.setX(centerX);
         this.map.setY(centerY);
-        this.map.setScaleX(6);
-        this.map.setScaleY(6);
+        //this.map.setScaleX(6);
+        //this.map.setScaleY(6);
 
         this.holderPane.getChildren().add(this.map);
     }

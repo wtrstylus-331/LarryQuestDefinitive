@@ -15,7 +15,7 @@ public class Player extends Entity{
         this.layoutY = Constants.HEIGHT / 2;
         Rectangle rect = new Rectangle(0,0,sprite.getWidth(), sprite.getHeight());
         rect.setFill(Color.RED);
-        super.getChildren().add(0,rect);
+        //super.getChildren().add(0,rect);
     }
 
     /*public void Move(Direction dir) {
