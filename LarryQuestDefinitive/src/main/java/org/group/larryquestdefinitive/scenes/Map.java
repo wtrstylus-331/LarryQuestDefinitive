@@ -1,7 +1,10 @@
 package org.group.larryquestdefinitive.scenes;
 
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 import org.group.larryquestdefinitive.Constants;
 import org.group.larryquestdefinitive.Game;
 import org.group.larryquestdefinitive.Main;
@@ -88,6 +91,20 @@ public class Map extends Pane {
         game.getScene().setRoot(gameScene);
 
         Main.stage.setScene(game.getScene());
+        centerStage(Main.stage);
         loop.start();
+    }
+
+    private static void centerStage(Stage stage) {
+        // Get the screen bounds
+        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+
+        // Calculate the center position
+        double centerX = (screenBounds.getWidth() - stage.getWidth()) / 2;
+        double centerY = (screenBounds.getHeight() - stage.getHeight()) / 2;
+
+        // Set the stage position
+        stage.setX(centerX);
+        stage.setY(centerY);
     }
 }
