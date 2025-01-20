@@ -16,7 +16,7 @@ public class GameLoop extends AnimationTimer {
 
     public GameLoop(Game game) {
         this.game = game;
-        entities = new ArrayList<>();
+        entities = game.getEntities();
     }
 
     @Override
