@@ -11,6 +11,7 @@ import javafx.animation.*;
 public class Player extends Entity{
     public Player(Image sprite, double x, double y, String animType){
         super(sprite, x, y, animType);
+        moveSpeed = 10;
         this.layoutX = Constants.WIDTH / 2;
         this.layoutY = Constants.HEIGHT / 2;
         Rectangle rect = new Rectangle(0,0,sprite.getWidth(), sprite.getHeight());

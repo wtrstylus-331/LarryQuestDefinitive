@@ -46,7 +46,7 @@ public class Game {
         currScene = scene;
         currScene.getChildren().add(player);
         for(int i = 0; i < entities.size(); i++){
-            currScene.getChildren().add(entities.get(i));
+            currScene.getHolder().getChildren().add(entities.get(i));
         }
         playScene.setRoot(scene);
         mc.setupInput(currScene);

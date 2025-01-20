@@ -39,6 +39,8 @@ public class Entity extends Pane{
   protected boolean movingLeft = false;
   protected boolean movingRight = false;
 
+  protected int moveSpeed;
+
   public Entity(Image sprite, double x, double y, String animType) {
 
     this.sprite = new ImageView(sprite);
@@ -149,10 +151,10 @@ public class Entity extends Pane{
     setLayoutX(layoutX);
     setLayoutY(layoutY);
 
-    if(movingUp && canMoveUp) posY -= 10; // Adjust this value based on your game logic
-    if(movingDown && canMoveDown) posY += 10; // Adjust this value based on your game logic
-    if(movingLeft && canMoveLeft) posX -= 10; // Adjust this value based on your game logic
-    if(movingRight && canMoveRight) posX += 10; // Adjust this value based on your game logic
+    if(movingUp && canMoveUp) posY -= 1 * moveSpeed; // Adjust this value based on your game logic
+    if(movingDown && canMoveDown) posY += 1 * moveSpeed; // Adjust this value based on your game logic
+    if(movingLeft && canMoveLeft) posX -= 1 * moveSpeed; // Adjust this value based on your game logic
+    if(movingRight && canMoveRight) posX += 1 * moveSpeed; // Adjust this value based on your game logic
   }
 
   public ImageView getSprite() {

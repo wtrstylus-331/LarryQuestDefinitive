@@ -9,6 +9,7 @@ public class Enemy extends Entity {
 
     public Enemy(Image sprite, double x, double y, String animType, Player player) {
         super(sprite, x, y, animType);
+        moveSpeed = 1;
         this.player = player;
     }
 
@@ -31,6 +32,8 @@ public class Enemy extends Entity {
             Move(Direction.LEFT);
         }
 
+        layoutX = posX;
+        layoutY = posY;
         // Update the enemy's position based on the movement
         super.Update();
     }
