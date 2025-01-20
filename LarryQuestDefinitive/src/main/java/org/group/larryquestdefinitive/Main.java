@@ -67,6 +67,8 @@ public class Main extends Application {
         GameLoop loop = new GameLoop(game);
         //TitlePage title = new TitlePage(new AnchorPane(), Constants.WIDTH, Constants.HEIGHT, game, loop);
         Map map = new Map();
+        map.setGame(game);
+        map.setLoop(loop);
         Scene scene = new Scene(map, 600, 400);
         stage.setScene(scene);
         

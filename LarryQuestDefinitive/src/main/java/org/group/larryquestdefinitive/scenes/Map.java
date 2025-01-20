@@ -1,5 +1,9 @@
 package org.group.larryquestdefinitive.scenes;
 
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import org.group.larryquestdefinitive.Constants;
+import org.group.larryquestdefinitive.Game;
 import org.group.larryquestdefinitive.Main;
 
 import javafx.scene.effect.DropShadow;
@@ -10,20 +14,32 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import org.group.larryquestdefinitive.control.GameLoop;
 
 public class Map extends Pane {
+
+    private Game game;
+    private GameLoop loop;
 
     public Map() {
         // Set background color or image
         this.setStyle("-fx-background-color: #2a2a2a;");
 
         // Add levels to the map
-        createLevel(50, 50, "level1_thumbnail.png", "Level 1");
-        createLevel(200, 50, "level2_thumbnail.png", "Level 2");
-        createLevel(350, 50, "level3_thumbnail.png", "Level 3");
+        createLevel(50, 50, "level1_thumbnail.png", "Level 1", () -> goToScene("Level3Scene2.png"));
+        createLevel(200, 50, "level2_thumbnail.png", "Level 2", () -> goToScene("Level5.png"));
+        createLevel(350, 50, "level3_thumbnail.png", "Level 3", () -> goToScene("Level6VersionA.png"));
     }
 
-    private void createLevel(double x, double y, String imagePath, String levelName) {
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    public void setLoop(GameLoop loop) {
+        this.loop = loop;
+    }
+
+    private void createLevel(double x, double y, String imagePath, String levelName, Runnable action) {
         // Load the level image
         Image image = new Image(Main.class.getResourceAsStream("scenes/" + imagePath), 100, 100, true, true);
         ImageView imageView = new ImageView(image);
@@ -41,6 +57,7 @@ public class Map extends Pane {
         // Add hover effect to the image
         imageView.setOnMouseEntered(event -> applyHighlight(imageView, highlightEffect));
         imageView.setOnMouseExited(event -> removeHighlight(imageView));
+        imageView.setOnMouseClicked(event -> action.run());
 
         // Add a label for the level
         Text label = new Text(levelName);
@@ -59,5 +76,18 @@ public class Map extends Pane {
 
     private void removeHighlight(ImageView imageView) {
         imageView.setEffect(null);
+    }
+
+    private void goToScene(String path) {
+        GameScene gameScene = new GameScene();
+
+        ImageView mapImage = new ImageView(new Image(Main.class.getResourceAsStream("scenes/" + path)));
+        gameScene.setMap(mapImage, 900, 500);
+
+        game.setScene(gameScene);
+        game.getScene().setRoot(gameScene);
+
+        Main.stage.setScene(game.getScene());
+        loop.start();
     }
 }

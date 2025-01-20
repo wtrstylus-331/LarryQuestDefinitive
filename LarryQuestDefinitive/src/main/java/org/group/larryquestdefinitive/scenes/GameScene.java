@@ -1,5 +1,7 @@
 package org.group.larryquestdefinitive.scenes;
 
+import org.group.larryquestdefinitive.Game;
+import org.group.larryquestdefinitive.control.GameLoop;
 import org.group.larryquestdefinitive.entities.Player;
 
 import javafx.scene.image.ImageView;
@@ -16,7 +18,7 @@ public class GameScene extends AnchorPane {
     private Pane holderPane;
     private ImageView map;
 
-    public GameScene(){
+    public GameScene() {
         holderPane = new Pane();
         Rectangle rect = new Rectangle(500, 500);
         //holderPane.getChildren().add(rect);
