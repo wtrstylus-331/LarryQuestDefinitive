@@ -8,6 +8,9 @@ import org.group.larryquestdefinitive.entities.Entity;
 import javafx.animation.AnimationTimer;
 
 public class GameLoop extends AnimationTimer {
+
+
+
     private static final long NANOS_PER_FRAME = 1_000_000_000 / 60; // Nanoseconds per frame (60 FPS)
 
     private Game game;
@@ -33,6 +36,8 @@ public class GameLoop extends AnimationTimer {
             for (int i = 0; i < entities.size(); i++) {
                 entities.get(i).Update();
             }
+
+
 
     //        System.out.println(game.getPlayer().getPositionX() + ", " + game.getPlayer().getPositionY());
        //     System.out.println("Entity: "+ entities.get(0).getPositionX() + ", " + entities.get(0).getPositionY());

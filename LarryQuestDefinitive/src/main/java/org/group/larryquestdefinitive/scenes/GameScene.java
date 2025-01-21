@@ -1,7 +1,5 @@
 package org.group.larryquestdefinitive.scenes;
 
-import org.group.larryquestdefinitive.Game;
-import org.group.larryquestdefinitive.control.GameLoop;
 import org.group.larryquestdefinitive.entities.Player;
 
 import javafx.scene.image.ImageView;
@@ -17,18 +15,53 @@ import org.group.larryquestdefinitive.control.Collider;
 public class GameScene extends AnchorPane {
     private Pane holderPane;
     private ImageView map;
+    private Rectangle hpBarBackground;
+    private Rectangle hpBar;
 
     public GameScene() {
         holderPane = new Pane();
-        Rectangle rect = new Rectangle(500, 500);
-        //holderPane.getChildren().add(rect);
+
+        // Initialize the background and foreground for the HP bar
+        hpBarBackground = new Rectangle(200, 20);  // Set background size of the HP bar
+        hpBarBackground.setFill(Color.GRAY);        // Gray color for the background
+        hpBarBackground.setStroke(Color.BLACK);    // Border for the background
+        hpBarBackground.setX(10);                  // Position at the top-left corner (X)
+        hpBarBackground.setY(10);                  // Position at the top-left corner (Y)
+
+        hpBar = new Rectangle(200, 20);             // HP bar is the same size as background initially
+        hpBar.setFill(Color.GREEN);                 // Green color for the HP bar
+
+        this.getChildren().add(hpBarBackground);    // Add the background to the scene
+        this.getChildren().add(hpBar);              // Add the HP bar to the scene
 
         this.getChildren().add(holderPane);
     }
 
     public void Update(Player player){
+        // Update the holder pane position
         holderPane.setLayoutX(-player.getPositionX() + 500);
         holderPane.setLayoutY(-player.getPositionY() + 300);
+
+        // Update the HP bar size based on player's current health
+        updateHPBar(player);
+    }
+
+    // Update the HP bar based on the player's current health
+    public void updateHPBar(Player player) {
+        // Accessing the player's current health and max health
+        double healthPercentage = (double) player.currHealth / player.maxHealth;
+        double newWidth = 200 * healthPercentage;  // Calculate the new width of the HP bar
+
+        hpBar.setWidth(newWidth);  // Set the width of the HP bar to match the health percentage
+
+        // Change the HP bar color based on the health percentage
+        if (healthPercentage > 0.5) {
+            hpBar.setFill(Color.GREEN); // Green when health is more than 50%
+        } else if (healthPercentage > 0.2) {
+            hpBar.setFill(Color.YELLOW); // Yellow when health is between 20% and 50%
+        } else {
+            hpBar.setFill(Color.RED);    // Red when health is below 20%
+        }
     }
 
     public void setMap(ImageView currentMap, int w, int h) {
@@ -41,8 +74,6 @@ public class GameScene extends AnchorPane {
 
         this.map.setX(centerX);
         this.map.setY(centerY);
-        //this.map.setScaleX(6);
-        //this.map.setScaleY(6);
 
         this.holderPane.getChildren().add(this.map);
     }
@@ -78,11 +109,10 @@ public class GameScene extends AnchorPane {
             col.fill(Color.rgb(0,0,0,0));
         }
 
-        //col.collide();
         return col;
     }
 
-    public Pane getHolder(){
+    public Pane getHolder() {
         return holderPane;
     }
 }

@@ -41,6 +41,8 @@ public class LevelScene extends Scene implements Constants {
         this.draw();
     }
 
+
+
     public void setMap(ImageView currentMap, int w, int h) {
         this.map = currentMap;
         this.map.setFitWidth(w);
