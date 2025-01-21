@@ -27,8 +27,8 @@ public class GameScene extends AnchorPane {
     }
 
     public void Update(Player player){
-        holderPane.setLayoutX(-player.getPositionX());
-        holderPane.setLayoutY(-player.getPositionY());
+        holderPane.setLayoutX(-player.getPositionX() + 500);
+        holderPane.setLayoutY(-player.getPositionY() + 300);
     }
 
     public void setMap(ImageView currentMap, int w, int h) {

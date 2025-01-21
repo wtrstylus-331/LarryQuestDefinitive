@@ -14,27 +14,32 @@ public class Enemy extends Entity {
     }
 
     public void Update() {
-        // Calculate the angle between the enemy and the player
-        double angle = Math.atan2(player.getPositionY() - posY, player.getPositionX() - posX) * 180 / Math.PI;
+        // Calculate the difference in X and Y positions between the player and the enemy
+        double deltaX = player.getPositionX() - this.getPositionX();
+        double deltaY = player.getPositionY() - this.getPositionY();
 
-        // Based on the angle, choose a direction
-        if (angle > -45 && angle < 45) {
-            // Move right
-            Move(Direction.RIGHT);
-        } else if (angle >= 45 && angle < 135) {
-            // Move up
-            Move(Direction.UP);
-        } else if (angle >= -135 && angle < -45) {
-            // Move down
-            Move(Direction.DOWN);
+        // Check which axis (X or Y) has a greater difference to prioritize movement
+        if (Math.abs(deltaX) > Math.abs(deltaY)) {
+            // If deltaX is greater, move left or right
+            if (deltaX > 0) {
+                this.Move(Direction.RIGHT); // Move right if player is to the right
+            } else {
+                this.Move(Direction.LEFT); // Move left if player is to the left
+            }
         } else {
-            // Move left
-            Move(Direction.LEFT);
+            // If deltaY is greater, move up or down
+            if (deltaY > 0) {
+                this.Move(Direction.DOWN); // Move down if player is below
+            } else {
+                this.Move(Direction.UP); // Move up if player is above
+            }
         }
 
+        // Update the enemy's position based on the movement
         layoutX = posX;
         layoutY = posY;
-        // Update the enemy's position based on the movement
         super.Update();
+
+        System.out.println(deltaX);
     }
 }

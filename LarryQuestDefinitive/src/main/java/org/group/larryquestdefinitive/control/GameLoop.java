@@ -33,6 +33,9 @@ public class GameLoop extends AnimationTimer {
             for (int i = 0; i < entities.size(); i++) {
                 entities.get(i).Update();
             }
+
+    //        System.out.println(game.getPlayer().getPositionX() + ", " + game.getPlayer().getPositionY());
+       //     System.out.println("Entity: "+ entities.get(0).getPositionX() + ", " + entities.get(0).getPositionY());
         }
     }
 }
