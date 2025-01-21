@@ -8,7 +8,7 @@ import org.group.larryquestdefinitive.Constants;
 
 public class Player extends Entity {
 
-    public int currHealth;
+    public static int currHealth;
     public int maxHealth;
 
     public Player(Image sprite, double x, double y, String animType) {
