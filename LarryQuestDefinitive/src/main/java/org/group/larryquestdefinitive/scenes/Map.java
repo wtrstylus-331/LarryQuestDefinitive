@@ -87,6 +87,21 @@ public class Map extends Pane {
         ImageView mapImage = new ImageView(new Image(Main.class.getResourceAsStream("scenes/" + path)));
         gameScene.setMap(mapImage, 900, 500);
 
+        switch (path) {
+            case "Level3Scene2.png" -> {
+                gameScene.addCollider(20,50,50,500);
+                gameScene.addCollider(925,50,50,500);
+                gameScene.addCollider(35,20,900,50);
+                gameScene.addCollider(35,530,900,50);
+            }
+            case "Level5.png" -> {
+
+            }
+            case "Level6VersionA.png" -> {
+                //
+            }
+        }
+
         game.setScene(gameScene);
         game.getScene().setRoot(gameScene);
 
