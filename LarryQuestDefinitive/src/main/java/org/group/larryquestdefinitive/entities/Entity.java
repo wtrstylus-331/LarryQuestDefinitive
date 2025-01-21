@@ -40,6 +40,9 @@ public class Entity extends Pane{
   protected boolean movingRight = false;
 
   protected int moveSpeed;
+  protected int maxHealth;
+  protected int currHealth;
+  
 
   public Entity(Image sprite, double x, double y, String animType) {
 
