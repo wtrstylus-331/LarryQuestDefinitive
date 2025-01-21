@@ -27,10 +27,6 @@ public class GameOver {
         Text gameOverText = new Text("Game Over!");
         gameOverText.setStyle("-fx-font-size: 40px; -fx-fill: white;");
 
-        // Create a Text element to show the final score (if desired)
-        Text finalScoreText = new Text("Your final score: 100"); // Update this with actual score logic
-        finalScoreText.setStyle("-fx-font-size: 20px; -fx-fill: white;");
-
         // Create a Button to restart the game
         Button restartButton = new Button("Restart");
         restartButton.setStyle("-fx-font-size: 20px; -fx-padding: 10px;");
@@ -42,7 +38,7 @@ public class GameOver {
         exitButton.setOnAction(e -> exitGame());
 
         // Add the elements to the layout
-        layout.getChildren().addAll(gameOverText, finalScoreText, restartButton, exitButton);
+        layout.getChildren().addAll(gameOverText, restartButton, exitButton);
 
         // Create a scene and set it on the stage
         Scene gameOverScene = new Scene(layout, 600, 400);

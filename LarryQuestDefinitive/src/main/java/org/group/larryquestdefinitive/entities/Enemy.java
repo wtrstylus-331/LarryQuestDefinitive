@@ -2,6 +2,7 @@ package org.group.larryquestdefinitive.entities;
 
 import javafx.scene.image.Image;
 import javafx.animation.*;
+import org.group.larryquestdefinitive.Main;
 
 public class Enemy extends Entity {
 
@@ -93,10 +94,14 @@ public class Enemy extends Entity {
     }
 
     // Handle enemy death (remove from game or other logic)
-    private void die() {
+   private void die() {
+       Main.stage.getScene().getRoot().getChildrenUnmodifiable().remove(this);
 
+       /*
         if (this.getParent() != null) {
             this.getParent().getChildren().remove(this); // Remove the enemy from its parent container
         }
+
+        */
     }
 }
