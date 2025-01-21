@@ -1,5 +1,6 @@
 package org.group.larryquestdefinitive.scenes;
 
+import javafx.scene.layout.Background;
 import org.group.larryquestdefinitive.entities.Player;
 
 import javafx.scene.image.ImageView;
@@ -20,6 +21,7 @@ public class GameScene extends AnchorPane {
 
     public GameScene() {
         holderPane = new Pane();
+        super.setBackground(Background.fill(Color.rgb(150,150,150)));
 
         // Initialize the background and foreground for the HP bar
         hpBarBackground = new Rectangle(200, 20);  // Set background size of the HP bar
@@ -30,11 +32,15 @@ public class GameScene extends AnchorPane {
 
         hpBar = new Rectangle(200, 20);             // HP bar is the same size as background initially
         hpBar.setFill(Color.GREEN);                 // Green color for the HP bar
+        hpBar.setX(10);
+        hpBar.setY(10);
 
+        this.getChildren().add(holderPane);
         this.getChildren().add(hpBarBackground);    // Add the background to the scene
         this.getChildren().add(hpBar);              // Add the HP bar to the scene
 
-        this.getChildren().add(holderPane);
+        hpBarBackground.toFront();
+        hpBar.toFront();
     }
 
     public void Update(Player player){
