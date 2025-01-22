@@ -63,4 +63,8 @@ public class Game {
     public ArrayList<Entity> getEntities(){
         return entities;
     }
+
+    public void removeEntity(Entity remove){
+        entities.remove(remove);
+    }
 }

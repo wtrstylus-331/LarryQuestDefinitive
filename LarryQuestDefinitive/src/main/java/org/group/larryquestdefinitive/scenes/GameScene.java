@@ -4,6 +4,7 @@ import javafx.scene.Node;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
+import org.group.larryquestdefinitive.Game;
 import org.group.larryquestdefinitive.entities.Enemy;
 import org.group.larryquestdefinitive.entities.Player;
 
@@ -26,6 +27,7 @@ public class GameScene extends AnchorPane {
     private ImageView map;
     private Rectangle hpBarBackground;
     private Rectangle hpBar;
+    private Game game;
 
     public GameScene() {
         holderPane = new Pane();
@@ -91,6 +93,10 @@ public class GameScene extends AnchorPane {
         this.map.setY(centerY);
 
         this.holderPane.getChildren().add(this.map);
+    }
+
+    public void setGame(Game g) {
+        this.game = g;
     }
 
     public void addObject(ImageView object, int x, int y, int w, int h, int collisionW, int collisionH, int xOffset, int yOffset) {
@@ -162,7 +168,10 @@ public class GameScene extends AnchorPane {
                     double magnitude = Math.sqrt(Math.pow(eX - pX, 2) + Math.pow(eY - pY, 2));
 
                     if (magnitude < 45) {
-                        System.out.println("within bounds");
+                        //System.out.println("within bounds");
+                        System.out.println("enemy hp before: " + enemy.GetEnemyHP());
+                        enemy.EnemyDamage();
+                        System.out.println("enemy hp after: " + enemy.GetEnemyHP());
                     } else {
                         System.out.println("outside bounds");
                     }

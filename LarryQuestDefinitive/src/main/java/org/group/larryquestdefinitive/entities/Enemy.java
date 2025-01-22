@@ -1,13 +1,20 @@
 package org.group.larryquestdefinitive.entities;
 
+import javafx.scene.Node;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 import org.group.larryquestdefinitive.Main;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class Enemy extends Entity {
 
     private Player player;
     private boolean isPaused;
     private long pauseTime;
+    private boolean isAlive = true;
 
     int enemyHP;
     private final long PAUSE_DURATION = 1000; // Pause for 1 second (1000 milliseconds)
@@ -30,8 +37,7 @@ public class Enemy extends Entity {
     public void EnemyDamage(){
 
         this.enemyHP -= 1;
-        if (enemyHP <= 0){
-
+        if (this.enemyHP <= 0){
             this.die();
 
         }
@@ -39,6 +45,10 @@ public class Enemy extends Entity {
     }
 
     public void Update() {
+        if (!isAlive) {
+            return; // Stop updating if the enemy is no longer alive
+        }
+
         // Calculate the difference in X and Y positions between the player and the enemy
         double deltaX = player.getPositionX() - this.getPositionX();
         double deltaY = player.getPositionY() - this.getPositionY();
@@ -73,9 +83,10 @@ public class Enemy extends Entity {
 
         // Check if the enemy's HP is 0 or less and delete it
         if (enemyHP <= 0) {
-            this.die();  // Remove the enemy from the game
+            die(); // Remove the enemy from the game
         }
     }
+
 
     // Helper method to move the enemy towards the player
     private void moveTowardsPlayer(double deltaX, double deltaY) {
@@ -96,19 +107,17 @@ public class Enemy extends Entity {
         }
     }
 
-
-
-
-
     // Handle enemy death (remove from game or other logic)
    private void die() {
-       Main.stage.getScene().getRoot().getChildrenUnmodifiable().remove(this);
+        System.out.println("reached method");
+        isAlive = false;
 
-       /*
-        if (this.getParent() != null) {
-            this.getParent().getChildren().remove(this); // Remove the enemy from its parent container
-        }
-
-        */
+        // Get the parent pane and remove the enemy
+       Pane parent = (Pane) this.getParent();
+       if (parent != null) {
+           parent.getChildren().remove(this);
+       } else {
+           System.out.println("Parent is null");
+       }
     }
 }
