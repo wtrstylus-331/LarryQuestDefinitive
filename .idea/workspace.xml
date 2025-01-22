@@ -7,7 +7,6 @@
     <list default="true" id="3f807991-b67b-46ea-85ab-2561d9626699" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LarryQuestDefinitive/src/main/java/org/group/larryquestdefinitive/entities/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/LarryQuestDefinitive/src/main/java/org/group/larryquestdefinitive/entities/Enemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LarryQuestDefinitive/src/main/java/org/group/larryquestdefinitive/scenes/GameOver.java" beforeDir="false" afterPath="$PROJECT_DIR$/LarryQuestDefinitive/src/main/java/org/group/larryquestdefinitive/scenes/GameOver.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -1,24 +1,41 @@
 package org.group.larryquestdefinitive.entities;
 
 import javafx.scene.image.Image;
-import javafx.animation.*;
 import org.group.larryquestdefinitive.Main;
 
 public class Enemy extends Entity {
 
     private Player player;
-    public static int hp;  // Public and static HP for the enemy (shared by all instances)
     private boolean isPaused;
     private long pauseTime;
+
+    int enemyHP;
     private final long PAUSE_DURATION = 1000; // Pause for 1 second (1000 milliseconds)
 
-    public Enemy(Image sprite, double x, double y, String animType, Player player) {
+    public Enemy(Image sprite, double x, double y, String animType, Player player, int enemyHp) {
         super(sprite, x, y, animType);
         moveSpeed = 1;
         this.player = player;
-        hp = 10; // Set the enemy's initial health (can adjust as needed)
+        this.enemyHP = enemyHp;
         this.isPaused = false;
         this.pauseTime = 0;
+    }
+
+    public int GetEnemyHP(){
+
+        return this.enemyHP;
+
+    }
+
+    public void EnemyDamage(){
+
+        this.enemyHP -= 1;
+        if (enemyHP <= 0){
+
+            this.die();
+
+        }
+
     }
 
     public void Update() {
@@ -55,7 +72,7 @@ public class Enemy extends Entity {
         super.Update();
 
         // Check if the enemy's HP is 0 or less and delete it
-        if (hp <= 0) {
+        if (enemyHP <= 0) {
             this.die();  // Remove the enemy from the game
         }
     }
@@ -79,19 +96,9 @@ public class Enemy extends Entity {
         }
     }
 
-    // Getter for enemy's health
-    public static int getHp() {
-        return hp;
-    }
 
-    // Method to reduce enemy health (can be used for enemy damage)
-    public static void takeDamage(int damage) {
-        hp -= damage;
-        if (hp <= 0) {
-            // Handle enemy death (for example, remove from game)
-            // Call die() method to handle removal or death logic
-        }
-    }
+
+
 
     // Handle enemy death (remove from game or other logic)
    private void die() {

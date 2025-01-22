@@ -61,7 +61,7 @@ public class Main extends Application {
 
         
         Player player = new Player(playerVis, 0, 0, "player");
-        Enemy enemy1 = new Enemy(playerVis, 0, 0, "player", player);
+        Enemy enemy1 = new Enemy(playerVis, 0, 0, "player", player, 3);
         GameScene startScene = new GameScene();
         Scene playScene = new Scene(startScene, Constants.WIDTH, Constants.HEIGHT);
         Game game = new Game(player, playScene);
