@@ -51,6 +51,7 @@ public class GameLoop extends AnimationTimer {
 
     public void end(){
         this.stop();
+        game.getPlayer().currHealth = 10;
         game.GameOver();
     }
 }

@@ -17,13 +17,17 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import org.group.larryquestdefinitive.control.GameLoop;
+import org.group.larryquestdefinitive.entities.Enemy;
+import org.group.larryquestdefinitive.entities.Player;
 
 public class Map extends Pane {
 
     private Game game;
     private GameLoop loop;
+    private Player player;
 
-    public Map() {
+    public Map(Player player) {
+        this.player = player;
         // Set background color or image
         //this.setStyle("-fx-background-color: #2a2a2a;");
         ImageView bg = new ImageView(new Image(Main.class.getResourceAsStream("scenes/map_bg.jpg")));
@@ -110,6 +114,9 @@ public class Map extends Pane {
             }
         }
          */
+
+        Enemy enemy1 = new Enemy(Main.playerVis, 400, 200, "player", player, 5);
+        game.addEntity(enemy1);
 
         game.setScene(gameScene);
         game.getScene().setRoot(gameScene);
