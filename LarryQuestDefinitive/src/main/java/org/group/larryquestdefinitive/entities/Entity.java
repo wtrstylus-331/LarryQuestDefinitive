@@ -59,8 +59,9 @@ public class Entity extends Pane{
 
     this.sprite = new ImageView(sprite);
     this.collider = new Rectangle(16, 8, 32, 50);
-    this.collider.setFill(Color.RED);
+    this.collider.setFill(Color.TRANSPARENT);
     super.getChildren().addAll(this.collider, this.sprite);
+    //super.getChildren().add(this.sprite);
     this.posX = x;
     this.posY = y;
     this.UpAnimation = initTimelines(animType, "up");
