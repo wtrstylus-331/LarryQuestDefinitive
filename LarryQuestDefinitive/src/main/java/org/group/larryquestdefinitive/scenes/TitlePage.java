@@ -92,6 +92,7 @@ public class TitlePage extends Scene implements Constants {
                 Game game = new Game(player, playScene, stage);
                 GameLoop loop = new GameLoop(game);
                 Map map = new Map(player);
+                map.centerStage(stage);
                 map.setGame(game);
                 map.setLoop(loop);
                 Scene scene = new Scene(map, 600, 400);

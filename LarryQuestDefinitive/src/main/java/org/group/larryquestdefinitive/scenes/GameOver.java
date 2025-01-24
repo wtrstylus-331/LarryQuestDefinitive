@@ -1,5 +1,6 @@
 package org.group.larryquestdefinitive.scenes;
 
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -8,6 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import org.group.larryquestdefinitive.Constants;
@@ -18,9 +20,11 @@ import org.group.larryquestdefinitive.entities.PlayerPane;
 
 public class GameOver {
     private Stage stage;
+    private int score;
 
-    public GameOver(Stage stage) {
+    public GameOver(Stage stage, int score) {
         this.stage = stage;
+        this.score = score;
     }
 
     public void display() {
@@ -31,6 +35,9 @@ public class GameOver {
         // Create a Text element for displaying the Game Over message
         Text gameOverText = new Text("Game Over!");
         gameOverText.setStyle("-fx-font-size: 40px; -fx-fill: white;");
+
+        Text scoreText = new Text("Final score: " + score);
+        scoreText.setStyle("-fx-font-size: 20px; -fx-fill: white;");
 
         // Create a Button to restart the game
         Button restartButton = new Button("Restart");
@@ -43,12 +50,13 @@ public class GameOver {
         exitButton.setOnAction(e -> exitGame());
 
         // Add the elements to the layout
-        layout.getChildren().addAll(gameOverText, restartButton, exitButton);
+        layout.getChildren().addAll(gameOverText, scoreText, restartButton, exitButton);
 
         // Create a scene and set it on the stage
         Scene gameOverScene = new Scene(layout, 600, 400);
         stage.setScene(gameOverScene);
         stage.show();
+        centerStage(stage);
     }
 
     // Method to restart the game
@@ -61,5 +69,18 @@ public class GameOver {
     private void exitGame() {
         // Close the game window
         System.exit(0);
+    }
+
+    public void centerStage(Stage stage) {
+        // Get the screen bounds
+        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+
+        // Calculate the center position
+        double centerX = (screenBounds.getWidth() - stage.getWidth()) / 2;
+        double centerY = (screenBounds.getHeight() - stage.getHeight()) / 2;
+
+        // Set the stage position
+        stage.setX(centerX);
+        stage.setY(centerY);
     }
 }

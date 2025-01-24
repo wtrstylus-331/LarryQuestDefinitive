@@ -7,6 +7,7 @@ import org.group.larryquestdefinitive.control.GameLoop;
 import org.group.larryquestdefinitive.control.MoveController;
 import org.group.larryquestdefinitive.entities.Entity;
 import org.group.larryquestdefinitive.entities.Player;
+import org.group.larryquestdefinitive.scenes.GameOver;
 import org.group.larryquestdefinitive.scenes.GameScene;
 
 import javafx.scene.Scene;
@@ -24,6 +25,7 @@ public class Game {
     private ArrayList<Entity> entities;
 
     private Stage stage;
+    private int score;
 
     public Game(Player player, Scene playScene, Stage stage){
         this.player = player;
@@ -44,6 +46,20 @@ public class Game {
 
     public Scene getScene(){
         return playScene;
+    }
+
+    public void incrementScore() {
+        score += 1;
+    }
+
+    public void resetScore() {
+        score = 0;
+    }
+
+    public void updateEntities() {
+        for (Entity entity : entities) {
+            entity.Update();
+        }
     }
 
     public void setScene(GameScene scene){
@@ -73,7 +89,8 @@ public class Game {
     }
 
     public void GameOver(){
-        org.group.larryquestdefinitive.scenes.GameOver go = new org.group.larryquestdefinitive.scenes.GameOver(stage);
+        GameOver go = new GameOver(stage, score);
         go.display();
+        resetScore();
     }
 }

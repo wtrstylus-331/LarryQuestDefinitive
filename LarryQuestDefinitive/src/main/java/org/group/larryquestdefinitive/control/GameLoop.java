@@ -29,6 +29,7 @@ public class GameLoop extends AnimationTimer {
         if (now - lastUpdate >= NANOS_PER_FRAME) {
             lastUpdate = now;
 
+            game.updateEntities();
             game.checkCollision();
             // Game update logic
             game.getCurrScene().Update(game.getPlayer());
