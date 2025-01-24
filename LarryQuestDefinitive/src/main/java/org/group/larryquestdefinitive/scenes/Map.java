@@ -92,6 +92,9 @@ public class Map extends Pane {
         gameScene.addCollider(35,20,900,50);
         gameScene.addCollider(35,530,900,50);
 
+        Maze maze = new Maze(10);
+        maze.addToGameScene(gameScene, 70);
+
         /*
         switch (path) {
             case "Level3Scene2.png", "Level5.png", "Level6VersionA.png" -> {

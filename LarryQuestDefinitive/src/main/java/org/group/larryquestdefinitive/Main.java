@@ -17,6 +17,7 @@ import org.group.larryquestdefinitive.entities.Player;
 import org.group.larryquestdefinitive.entities.PlayerPane;
 import org.group.larryquestdefinitive.scenes.GameScene;
 import org.group.larryquestdefinitive.scenes.Map;
+import org.group.larryquestdefinitive.scenes.Maze;
 import org.group.larryquestdefinitive.scenes.TitlePage;
 
 public class Main extends Application {
@@ -87,6 +88,12 @@ public class Main extends Application {
 
     // Run the program
     public static void main(String[] args) {
+        for (int difficulty = 1; difficulty <= 5; difficulty++) {
+            System.out.println("Maze Difficulty: " + difficulty);
+            Maze generator = new Maze(difficulty);
+            generator.printMaze();
+            System.out.println();
+        }
         launch();
     }
 
