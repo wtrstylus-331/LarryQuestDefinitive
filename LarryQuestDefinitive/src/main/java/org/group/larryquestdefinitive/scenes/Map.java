@@ -2,7 +2,7 @@ package org.group.larryquestdefinitive.scenes;
 
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.*;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.group.larryquestdefinitive.Constants;
@@ -13,7 +13,6 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -26,12 +25,16 @@ public class Map extends Pane {
 
     public Map() {
         // Set background color or image
-        this.setStyle("-fx-background-color: #2a2a2a;");
+        //this.setStyle("-fx-background-color: #2a2a2a;");
+        ImageView bg = new ImageView(new Image(Main.class.getResourceAsStream("scenes/map_bg.jpg")));
+        bg.setFitWidth(600);
+        bg.setFitHeight(550);
+        this.getChildren().add(bg);
 
         // Add levels to the map
-        createLevel(50, 50, "level1_thumbnail.png", "Level 1", () -> goToScene("Level3Scene2.png"));
-        createLevel(200, 50, "level2_thumbnail.png", "Level 2", () -> goToScene("Level5.png"));
-        createLevel(350, 50, "level3_thumbnail.png", "Level 3", () -> goToScene("Level6VersionA.png"));
+        createLevel(50, 150, "level1_thumbnail.png", "Level 1", () -> goToScene("Level3Scene2.png"));
+        createLevel(240, 30, "level2_thumbnail.png", "Level 2", () -> goToScene("Level5.png"));
+        createLevel(370, 250, "level3_thumbnail.png", "Level 3", () -> goToScene("Level6VersionA.png"));
     }
 
     public void setGame(Game game) {
@@ -62,15 +65,17 @@ public class Map extends Pane {
         imageView.setOnMouseExited(event -> removeHighlight(imageView));
         imageView.setOnMouseClicked(event -> action.run());
 
-        // Add a label for the level
+        /*Add a label for the level
         Text label = new Text(levelName);
         label.setFont(Font.font("Arial", 16));
         label.setFill(Color.WHITE);
         label.setLayoutX(x + 10); // Adjust based on image size
         label.setLayoutY(y + 120);
 
+         */
+
         // Add to the pane
-        this.getChildren().addAll(imageView, label);
+        this.getChildren().addAll(imageView/*, label*/);
     }
 
     private void applyHighlight(ImageView imageView, DropShadow highlightEffect) {
