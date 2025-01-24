@@ -1,3 +1,9 @@
+/*
+Program name: GameOver.java
+Date: Jan 24, 2025
+Purpose: Class to display game over scene with final score
+ */
+
 package org.group.larryquestdefinitive.scenes;
 
 import javafx.geometry.Rectangle2D;
@@ -10,9 +16,11 @@ import javafx.stage.Stage;
 import org.group.larryquestdefinitive.Main;
 
 public class GameOver {
+    // variables
     private Stage stage;
     private int score;
 
+    // constructor
     public GameOver(Stage stage, int score) {
         this.stage = stage;
         this.score = score;
@@ -48,7 +56,7 @@ public class GameOver {
         stage.setScene(gameOverScene);
         stage.show();
         centerStage(stage);
-    }
+    } // end of display method
 
     // Method to restart the game
     private void restartGame() {
@@ -74,4 +82,4 @@ public class GameOver {
         stage.setX(centerX);
         stage.setY(centerY);
     }
-}
+} // end of GameOver class
