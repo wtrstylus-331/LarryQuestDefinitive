@@ -4,12 +4,17 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import org.group.larryquestdefinitive.Constants;
 import org.group.larryquestdefinitive.Main;
+import org.group.larryquestdefinitive.control.MoveController;
+import org.group.larryquestdefinitive.entities.Player;
+import org.group.larryquestdefinitive.entities.PlayerPane;
 
 public class GameOver {
     private Stage stage;
@@ -48,7 +53,9 @@ public class GameOver {
 
     // Method to restart the game
     private void restartGame() {
-    }
+        stage.setScene(Main.title);
+        stage.show();
+    }    
 
     // Method to exit the game
     private void exitGame() {

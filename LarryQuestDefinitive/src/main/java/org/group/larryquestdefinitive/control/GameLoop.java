@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.group.larryquestdefinitive.Game;
 import org.group.larryquestdefinitive.entities.Entity;
+import org.group.larryquestdefinitive.scenes.GameOver;
 
 import javafx.animation.AnimationTimer;
 
@@ -37,10 +38,19 @@ public class GameLoop extends AnimationTimer {
                 entities.get(i).Update();
             }
 
+            if(game.getPlayer().currHealth <= 0){
+                 end();
+            }
+
 
 
     //        System.out.println(game.getPlayer().getPositionX() + ", " + game.getPlayer().getPositionY());
        //     System.out.println("Entity: "+ entities.get(0).getPositionX() + ", " + entities.get(0).getPositionY());
         }
+    }
+
+    public void end(){
+        this.stop();
+        game.GameOver();
     }
 }

@@ -10,7 +10,7 @@ public class CollisionDetection {
         // Reset movement flags
         entity.setPossibleMove(Direction.ALL, true);
 
-        Bounds entityBounds = entity.getBoundsInParent();
+        Bounds entityBounds = entity.getCollider().localToScene(entity.getCollider().getBoundsInLocal());
 
         for (var node : holderPane.getChildren()) {
             if (node instanceof Collider collider) {

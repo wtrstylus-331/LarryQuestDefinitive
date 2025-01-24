@@ -43,11 +43,14 @@ public class Main extends Application {
 
     public static boolean debugMode = true;
 
+    public static TitlePage title;
+
     // Initialize the stage
     @Override
     public void start(Stage stage) {
-        /*TitlePage title = new TitlePage(new AnchorPane(), Constants.WIDTH, Constants.HEIGHT);
-        Player player = new Player(playerIdle, 0, 0, plrUp, plrLeft, plrDown, plrRight);
+        
+        Player player = new Player(playerVis, 200, 200, "player");
+        title = new TitlePage(new AnchorPane(), Constants.WIDTH, Constants.HEIGHT, player, stage);
         MoveController mc = new MoveController(player);
         mc.setupInput(title.parent);
         debugTimelines();
@@ -58,14 +61,14 @@ public class Main extends Application {
         stage.setScene(title);
         stage.setResizable(false);
         stage.show();
-        Main.stage = stage;*/
+        Main.stage = stage;
 
-        
+        /* 
         Player player = new Player(playerVis, 200, 200, "player");
-        Enemy enemy1 = new Enemy(playerVis, 200, 200, "player", player, 5);
+        Enemy enemy1 = new Enemy(playerVis, 400, 200, "player", player, 5);
         GameScene startScene = new GameScene();
         Scene playScene = new Scene(startScene, Constants.WIDTH, Constants.HEIGHT);
-        Game game = new Game(player, playScene);
+        Game game = new Game(player, playScene, stage);
         game.addEntity(enemy1);
         //game.setScene(startScene);
         GameLoop loop = new GameLoop(game);
@@ -84,6 +87,7 @@ public class Main extends Application {
         stage.show();
         Main.stage = stage;
         //loop.start();
+        */
     }
 
     // Run the program

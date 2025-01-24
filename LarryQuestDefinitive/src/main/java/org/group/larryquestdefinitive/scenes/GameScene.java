@@ -1,11 +1,6 @@
 package org.group.larryquestdefinitive.scenes;
 
-import javafx.scene.Node;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
-import org.group.larryquestdefinitive.Game;
-import org.group.larryquestdefinitive.entities.Enemy;
 import org.group.larryquestdefinitive.entities.Player;
 
 import javafx.scene.image.ImageView;
@@ -18,16 +13,11 @@ import org.group.larryquestdefinitive.Constants;
 import org.group.larryquestdefinitive.Main;
 import org.group.larryquestdefinitive.control.Collider;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 public class GameScene extends AnchorPane {
     private Pane holderPane;
     private ImageView map;
     private Rectangle hpBarBackground;
     private Rectangle hpBar;
-    private Game game;
 
     public GameScene() {
         holderPane = new Pane();
@@ -48,7 +38,6 @@ public class GameScene extends AnchorPane {
         this.getChildren().add(holderPane);
         this.getChildren().add(hpBarBackground);    // Add the background to the scene
         this.getChildren().add(hpBar);              // Add the HP bar to the scene
-        this.listener();
 
         hpBarBackground.toFront();
         hpBar.toFront();
@@ -95,10 +84,6 @@ public class GameScene extends AnchorPane {
         this.holderPane.getChildren().add(this.map);
     }
 
-    public void setGame(Game g) {
-        this.game = g;
-    }
-
     public void addObject(ImageView object, int x, int y, int w, int h, int collisionW, int collisionH, int xOffset, int yOffset) {
         object.setFitWidth(w);
         object.setFitHeight(h);
@@ -135,64 +120,5 @@ public class GameScene extends AnchorPane {
 
     public Pane getHolder() {
         return holderPane;
-    }
-
-    private void listener() {
-        super.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-            if (e.getButton() == MouseButton.PRIMARY) {
-                Player currPlr = null;
-                Enemy enemy = null;
-
-                // Traverse all nodes recursively to find Player and Enemy
-                for (Node node : getAllNodes(super.getScene().getRoot())) {
-                    if (node instanceof Player) {
-                        currPlr = (Player) node;
-                    } else if (node instanceof Enemy) {
-                        enemy = (Enemy) node;
-                    }
-
-                    // Exit early if both are found
-                    if (currPlr != null && enemy != null) {
-                        break;
-                    }
-                }
-
-                // Check if both currPlr and enemy are set
-                if (currPlr != null && enemy != null) {
-                    double pX = currPlr.getPositionX();
-                    double pY = currPlr.getPositionY();
-
-                    double eX = enemy.getPositionX();
-                    double eY = enemy.getPositionY();
-
-                    double magnitude = Math.sqrt(Math.pow(eX - pX, 2) + Math.pow(eY - pY, 2));
-
-                    if (magnitude < 45) {
-                        //System.out.println("within bounds");
-                        System.out.println("enemy hp before: " + enemy.GetEnemyHP());
-                        enemy.EnemyDamage();
-                        System.out.println("enemy hp after: " + enemy.GetEnemyHP());
-                    } else {
-                        System.out.println("outside bounds");
-                    }
-                } else {
-                    System.out.println("Player or Enemy is null!");
-                }
-            }
-        });
-    }
-
-    // Helper method to traverse the entire node tree
-    private Collection<? extends Node> getAllNodes(Node root) {
-        List<Node> nodes = new ArrayList<>();
-        if (root instanceof Pane) {
-            nodes.add(root);
-            for (Node child : ((Pane) root).getChildren()) {
-                nodes.addAll(getAllNodes(child));
-            }
-        } else {
-            nodes.add(root);
-        }
-        return nodes;
     }
 }

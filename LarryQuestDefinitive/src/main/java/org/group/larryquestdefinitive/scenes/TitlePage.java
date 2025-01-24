@@ -13,23 +13,27 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
 import org.group.larryquestdefinitive.Constants;
 import org.group.larryquestdefinitive.Game;
 import org.group.larryquestdefinitive.Main;
 import org.group.larryquestdefinitive.control.GameLoop;
+import org.group.larryquestdefinitive.entities.Enemy;
+import org.group.larryquestdefinitive.entities.Player;
 
 public class TitlePage extends Scene implements Constants {
     public AnchorPane parent;
     private Button button;
     private Text title;
-    private Game game;
-    private GameLoop loop;
+    private Player player;
+    private Stage stage;
 
-    public TitlePage(Parent root, double w, double h, Game game, GameLoop loop) {
+    public TitlePage(Parent root, double w, double h, Player player, Stage stage) {
         super(root, w, h);
         this.parent = (AnchorPane) root;
-        this.game = game;
-        this.loop = loop;
+        this.player = player;
+        this.stage = stage;
 
         this.addElements();
         this.addListener();
@@ -80,8 +84,18 @@ public class TitlePage extends Scene implements Constants {
             // set to intro scene or whatever
             // temporary testing
             if (Main.debugMode) {
+                Enemy enemy1 = new Enemy(Main.playerVis, 400, 200, "player", player, 5);
+                GameScene startScene = new GameScene();
+                Scene playScene = new Scene(startScene, Constants.WIDTH, Constants.HEIGHT);
                 GameScene test = new GameScene();
-                test.setMap(new ImageView(new Image(Main.class.getResourceAsStream("scenes/Level2.png"))), 900, 500);
+                
+                Game game = new Game(player, playScene, stage);
+                GameLoop loop = new GameLoop(game);
+                Map map = new Map();
+                map.setGame(game);
+                map.setLoop(loop);
+                Scene scene = new Scene(map, 600, 400);
+                stage.setScene(scene);
 
                 /*test.addCollider(20,50,50,500);
                 test.addCollider(925,50,50,500);
@@ -89,9 +103,9 @@ public class TitlePage extends Scene implements Constants {
                 test.addCollider(35,530,900,50);
                    */
                 
-                Main.stage.setScene(game.getScene());
+                /*Main.stage.setScene(game.getScene());
                 game.setScene(test);
-                loop.start();
+                loop.start();*/
             }
         });
     } // end of addListener method

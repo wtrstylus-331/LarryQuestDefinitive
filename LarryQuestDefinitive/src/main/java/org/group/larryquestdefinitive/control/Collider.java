@@ -23,12 +23,12 @@ public class Collider extends Rectangle {
         return playerBounds.intersects(colliderBounds);
     }
 
-    public boolean isColliding(Entity player) {
+    public boolean isColliding(Entity entity) {
         // Get bounds since both nodes are within scene
-        var playerBounds = player.localToScene(player.getBoundsInLocal());
+        var entityBounds = entity.getCollider().localToScene(entity.getCollider().getBoundsInLocal());
         var colliderBounds = this.localToScene(this.getBoundsInLocal());
 
         // Check if the bounds intersect
-        return playerBounds.intersects(colliderBounds);
+        return entityBounds.intersects(colliderBounds);
     }
 }

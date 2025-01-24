@@ -2,6 +2,8 @@ package org.group.larryquestdefinitive.entities;
 
 import javafx.scene.image.*;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 import org.group.larryquestdefinitive.Constants;
@@ -42,12 +44,16 @@ public class Entity extends Pane{
   protected int moveSpeed;
   protected int maxHealth;
   protected int currHealth;
+
+  protected Rectangle collider;
   
 
   public Entity(Image sprite, double x, double y, String animType) {
 
     this.sprite = new ImageView(sprite);
-    super.getChildren().add(this.sprite);
+    this.collider = new Rectangle(16, 8, 32, 50);
+    this.collider.setFill(Color.RED);
+    super.getChildren().addAll(this.collider, this.sprite);
     this.posX = x;
     this.posY = y;
     this.UpAnimation = initTimelines(animType, "up");
@@ -233,5 +239,9 @@ public class Entity extends Pane{
 
   private Image getIdle(String type, String dir){
     return new Image(Main.class.getResourceAsStream("sprites/" + type + "/" + dir + "/walk_" + dir + 1 + ".png"));
+  }
+
+  public Rectangle getCollider(){
+    return collider;
   }
 }

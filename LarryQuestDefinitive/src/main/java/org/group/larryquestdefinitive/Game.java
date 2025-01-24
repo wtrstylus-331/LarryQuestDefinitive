@@ -10,6 +10,7 @@ import org.group.larryquestdefinitive.entities.Player;
 import org.group.larryquestdefinitive.scenes.GameScene;
 
 import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 public class Game {
 
@@ -22,9 +23,12 @@ public class Game {
 
     private ArrayList<Entity> entities;
 
-    public Game(Player player, Scene playScene){
+    private Stage stage;
+
+    public Game(Player player, Scene playScene, Stage stage){
         this.player = player;
         this.playScene = playScene;
+        this.stage = stage;
         mc = new MoveController(this.player);
         cd = new CollisionDetection();
         entities = new ArrayList<>();
@@ -66,5 +70,10 @@ public class Game {
 
     public void removeEntity(Entity remove){
         entities.remove(remove);
+    }
+
+    public void GameOver(){
+        org.group.larryquestdefinitive.scenes.GameOver go = new org.group.larryquestdefinitive.scenes.GameOver(stage);
+        go.display();
     }
 }
