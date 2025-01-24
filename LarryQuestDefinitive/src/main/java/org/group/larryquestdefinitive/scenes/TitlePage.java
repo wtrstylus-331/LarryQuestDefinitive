@@ -1,10 +1,14 @@
+/*
+Program name: TitlePage.java
+Date: Jan 24, 2025
+Purpose: Title page to show game name and be able to load map
+ */
+
 package org.group.larryquestdefinitive.scenes;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -17,18 +21,18 @@ import javafx.stage.Stage;
 
 import org.group.larryquestdefinitive.Constants;
 import org.group.larryquestdefinitive.Game;
-import org.group.larryquestdefinitive.Main;
 import org.group.larryquestdefinitive.control.GameLoop;
-import org.group.larryquestdefinitive.entities.Enemy;
 import org.group.larryquestdefinitive.entities.Player;
 
 public class TitlePage extends Scene implements Constants {
+    // variables
     public AnchorPane parent;
     private Button button;
     private Text title;
     private Player player;
     private Stage stage;
 
+    // constructor set to defaults
     public TitlePage(Parent root, double w, double h, Player player, Stage stage) {
         super(root, w, h);
         this.parent = (AnchorPane) root;
@@ -81,33 +85,18 @@ public class TitlePage extends Scene implements Constants {
         });
 
         this.button.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-            // set to intro scene or whatever
-            // temporary testing
-            if (Main.debugMode) {
-                Enemy enemy1 = new Enemy(Main.playerVis, 400, 200, "player", player, 5);
-                GameScene startScene = new GameScene();
-                Scene playScene = new Scene(startScene, Constants.WIDTH, Constants.HEIGHT);
-                GameScene test = new GameScene();
-                
-                Game game = new Game(player, playScene, stage);
-                GameLoop loop = new GameLoop(game);
-                Map map = new Map(player);
-                map.centerStage(stage);
-                map.setGame(game);
-                map.setLoop(loop);
-                Scene scene = new Scene(map, 600, 400);
-                stage.setScene(scene);
+            // set to map
+            GameScene startScene = new GameScene();
+            Scene playScene = new Scene(startScene, Constants.WIDTH, Constants.HEIGHT);
 
-                /*test.addCollider(20,50,50,500);
-                test.addCollider(925,50,50,500);
-                test.addCollider(35,20,900,50);
-                test.addCollider(35,530,900,50);
-                   */
-                
-                /*Main.stage.setScene(game.getScene());
-                game.setScene(test);
-                loop.start();*/
-            }
+            Game game = new Game(player, playScene, stage);
+            GameLoop loop = new GameLoop(game);
+            Map map = new Map(player);
+            map.centerStage(stage);
+            map.setGame(game);
+            map.setLoop(loop);
+            Scene scene = new Scene(map, 600, 400);
+            stage.setScene(scene);
         });
     } // end of addListener method
 } // end of TitlePage class

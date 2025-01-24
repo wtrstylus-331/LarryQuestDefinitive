@@ -1,3 +1,9 @@
+/*
+Program name: Entity.java
+Date: Jan 24, 2025
+Purpose: Superclass to control animations and some collision
+ */
+
 package org.group.larryquestdefinitive.entities;
 
 import javafx.scene.image.*;
@@ -5,31 +11,34 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-
-import org.group.larryquestdefinitive.Constants;
 import org.group.larryquestdefinitive.Main;
 
 import javafx.animation.*;
 
 public class Entity extends Pane{
 
+    // sprite
   protected ImageView sprite;
 
+  // positions
   protected double posX;
   protected double posY;
   protected double layoutX;
   protected double layoutY;
 
+  // timelines for animations
   protected Timeline UpAnimation; 
   protected Timeline LeftAnimation; 
   protected Timeline DownAnimation;
   protected Timeline RightAnimation;
 
+  // idle sprites
   protected Image idleUp;
   protected Image idleDown;
   protected Image idleLeft;
   protected Image idleRight;
 
+  // booleans
   protected Direction direction = Direction.UP;
   protected boolean canMoveRight = true;
   protected boolean canMoveLeft = true;
@@ -42,12 +51,10 @@ public class Entity extends Pane{
   protected boolean movingRight = false;
 
   protected int moveSpeed;
-  protected int maxHealth;
-  protected int currHealth;
 
   protected Rectangle collider;
-  
 
+  // constructor to set default values
   public Entity(Image sprite, double x, double y, String animType) {
 
     this.sprite = new ImageView(sprite);
@@ -67,6 +74,7 @@ public class Entity extends Pane{
     idleRight = getIdle(animType, "right");
   }
 
+  // method to play animations based on direction
   public void Move(Direction dir) {
     switch (dir) {
         case Direction.UP:
@@ -137,8 +145,9 @@ public class Entity extends Pane{
             movingLeft = false;
             break;
     }
-  }
+  } // end of Move method
 
+    // method to stop animations
   public void Stop(){
     UpAnimation.stop();
     DownAnimation.stop();
@@ -154,8 +163,9 @@ public class Entity extends Pane{
     movingDown = false;
     movingLeft = false;
     movingRight = false;
-  }
+  } // end of Stop method
 
+    // method to update position
   public void Update() {
     setLayoutX(layoutX);
     setLayoutY(layoutY);
@@ -166,34 +176,32 @@ public class Entity extends Pane{
     if(movingRight && canMoveRight) posX += 1 * moveSpeed; // Adjust this value based on your game logic
   }
 
+  // method to return sprite
   public ImageView getSprite() {
     return sprite;
   }
 
+  // method to return x position
   public double getPositionX() {
     return posX;
   }
 
+   // method to set x position
   public void setPositionX(double x) {
     this.posX = x;
   }
 
+  // method to return y position
   public double getPositionY() {
     return posY;
   }
 
+  // method to set y position
   public void setPositionY(double y) {
     this.posY = y;
   }
 
-  public Direction getDirection(){
-    return direction;
-  }
-
-  public void setDirection(Direction dir){
-    direction = dir;
-  }
-
+  // method to conditionally set boolean flags for movement
   public void setPossibleMove(Direction dir, boolean possible){
     switch (dir) {
       case UP:
@@ -215,15 +223,19 @@ public class Entity extends Pane{
         canMoveRight = possible;
         break;
     }
-  }
+  } // end of setPossibleMove method
 
+    //  method to set sprite image
   public void setImage(Image image){
     this.sprite.setImage(image);
   }
 
+  // method to create timelines for movement animations
   private Timeline initTimelines(String type, String dir) {
         Timeline timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
+
+        // loop through resource and add to specific timeline param
         for (int i = 1; i <= 9; i++) {
             i = i == 1 ? 2 : i;
             int index = i;
@@ -237,11 +249,13 @@ public class Entity extends Pane{
         return timeline;
     } // end of initTimelines method
 
+    // method to get idle sprite
   private Image getIdle(String type, String dir){
     return new Image(Main.class.getResourceAsStream("sprites/" + type + "/" + dir + "/walk_" + dir + 1 + ".png"));
   }
 
+  // method to return collider rectangle
   public Rectangle getCollider(){
     return collider;
   }
-}
+} // end of Entity class

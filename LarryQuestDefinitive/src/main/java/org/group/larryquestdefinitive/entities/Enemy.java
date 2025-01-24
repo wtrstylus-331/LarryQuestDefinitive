@@ -1,16 +1,17 @@
+/*
+Program name: Enemy.java
+Date: Jan 24, 2025
+Purpose: Enemy class extending from entity
+ */
+
 package org.group.larryquestdefinitive.entities;
 
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
-import org.group.larryquestdefinitive.Main;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 public class Enemy extends Entity {
 
+    // variables
     private Player player;
     private boolean isPaused;
     private long pauseTime;
@@ -19,7 +20,9 @@ public class Enemy extends Entity {
     int enemyHP;
     private final long PAUSE_DURATION = 1000; // Pause for 1 second (1000 milliseconds)
 
+    // constructor
     public Enemy(Image sprite, double x, double y, String animType, Player player, int enemyHp) {
+        // set default values
         super(sprite, x, y, animType);
         moveSpeed = 1;
         this.player = player;
@@ -28,22 +31,20 @@ public class Enemy extends Entity {
         this.pauseTime = 0;
     }
 
+    // method to return current enemy hp
     public int GetEnemyHP(){
-
         return this.enemyHP;
-
     }
 
+    // method to decrement enemy hp
     public void EnemyDamage(){
-
         this.enemyHP -= 1;
         if (this.enemyHP <= 0){
             this.die();
-
         }
-
     }
 
+    // method to update enemy calculations
     public void Update() {
         if (!isAlive) {
             return; // Stop updating if the enemy is no longer alive
@@ -85,7 +86,7 @@ public class Enemy extends Entity {
         if (enemyHP <= 0) {
             die(); // Remove the enemy from the game
         }
-    }
+    } // end of Update method
 
 
     // Helper method to move the enemy towards the player
@@ -105,7 +106,7 @@ public class Enemy extends Entity {
                 this.Move(Direction.UP); // Move up if player is above
             }
         }
-    }
+    } // end of moveTowardsPlayer method
 
     // Handle enemy death (remove from game or other logic)
    private void die() {
@@ -120,4 +121,4 @@ public class Enemy extends Entity {
            System.out.println("Parent is null");
        }
     }
-}
+} // end of Enemy class

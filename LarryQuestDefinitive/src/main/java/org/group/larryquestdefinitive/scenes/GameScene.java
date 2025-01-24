@@ -1,6 +1,11 @@
+/*
+Program name: GameScene.java
+Date: Jan 24, 2025
+Purpose: Main scene where player and enemy logic are handled, with UI elements for health and colliders
+ */
+
 package org.group.larryquestdefinitive.scenes;
 
-import javafx.scene.Node;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -22,11 +27,11 @@ import org.group.larryquestdefinitive.Main;
 import org.group.larryquestdefinitive.control.Collider;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
 public class GameScene extends AnchorPane {
+    // private variables including UI elements
     private Pane holderPane;
     private ImageView map;
     private Rectangle hpBarBackground;
@@ -34,9 +39,11 @@ public class GameScene extends AnchorPane {
     private Text scoreText;
     private Game game;
 
+    // for wave system
     private int waveCounter, score;
     private Random rand = new Random();
 
+    // constructor
     public GameScene() {
         holderPane = new Pane();
         waveCounter = score = 0;
@@ -54,6 +61,7 @@ public class GameScene extends AnchorPane {
         hpBar.setX(10);
         hpBar.setY(10);
 
+        // set score text
         scoreText = new Text("Score: 0");
         scoreText.setX(10);
         scoreText.setY(70);
@@ -64,16 +72,19 @@ public class GameScene extends AnchorPane {
 
         hpBarBackground.toFront();
         hpBar.toFront();
-    }
+    } // end of GameScene constructor
 
+    // method to set game variable
     public void setGame(Game g) {
         this.game = g;
     }
 
+    // method to update score label
     private void updateScore(int score) {
         scoreText.setText("Score: " + score);
     }
 
+    // Method to update pane position and player hp
     public void Update(Player player){
         // Update the holder pane position
         holderPane.setLayoutX(-player.getPositionX() + 500);
@@ -99,22 +110,26 @@ public class GameScene extends AnchorPane {
         } else {
             hpBar.setFill(Color.RED);    // Red when health is below 20%
         }
-    }
+    } // end of updateHPBar method
 
+    // method to set map from image
     public void setMap(ImageView currentMap, int w, int h) {
         this.map = currentMap;
         this.map.setFitWidth(w);
         this.map.setFitHeight(h);
 
+        // center position
         double centerX = (Constants.WIDTH - this.map.getFitWidth()) / 2;
         double centerY = (Constants.HEIGHT - this.map.getFitHeight()) / 2;
 
         this.map.setX(centerX);
         this.map.setY(centerY);
 
+        // add to pane
         this.holderPane.getChildren().add(this.map);
-    }
+    } // end of setMap method
 
+    // method to add image object with collider
     public void addObject(ImageView object, int x, int y, int w, int h, int collisionW, int collisionH, int xOffset, int yOffset) {
         object.setFitWidth(w);
         object.setFitHeight(h);
@@ -127,8 +142,9 @@ public class GameScene extends AnchorPane {
 
         this.holderPane.getChildren().add(object);
         this.holderPane.getChildren().add(collider);
-    }
+    } // end of addObject method
 
+    // method to add collider object only
     public void addCollider(int x, int y, int collisionW, int collisionH) {
         Rectangle collider = createCollider(collisionW,collisionH);
         collider.setX(x);
@@ -137,9 +153,11 @@ public class GameScene extends AnchorPane {
         this.holderPane.getChildren().add(collider);
     }
 
+    // method to create collider object
     private Rectangle createCollider(int w, int h) {
         Collider col = new Collider(w,h);
 
+        // fill color if in debug mode
         if (Main.debugMode) {
             col.fill(Color.rgb(200,0,200, 0.7));
         } else {
@@ -149,21 +167,23 @@ public class GameScene extends AnchorPane {
         return col;
     }
 
+    // method to return pane holding all elements
     public Pane getHolder() {
         return holderPane;
     }
 
+    // method to handle mouse clicked event, enemy wave system and score
     private void listener() {
         super.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             if (e.getButton() == MouseButton.PRIMARY) {
-                Player currPlr = game.getPlayer(); // Get the current player from the game object
+                Player currPlr = game.getPlayer(); // get the current player from the game object
 
                 if (currPlr == null) {
                     System.out.println("Player is null!");
                     return;
                 }
 
-                // Generalized enemy handling logic
+                // generalized enemy handling in list
                 List<Enemy> enemies = new ArrayList<>();
                 for (Entity entity : game.getEntities()) {
                     if (entity instanceof Enemy) {
@@ -171,18 +191,18 @@ public class GameScene extends AnchorPane {
                     }
                 }
 
-                // Check if there are any enemies at all
+                // check if there are any enemies at all
                 if (enemies.isEmpty()) {
-                    // No enemies exist, increment wave and spawn new enemies
-                    System.out.println("Wave: " + waveCounter); // Debugging log
+                    // no enemies exist, increment wave and spawn new enemies
+                    //System.out.println("Wave: " + waveCounter);
                     score++;
                     game.incrementScore();
                     updateScore(score);
                     spawnNewEnemy(currPlr);
-                    return; // Exit early
+                    return; // exit
                 }
 
-                // Find the first enemy within attack range
+                // find the first enemy within attack range
                 Enemy targetEnemy = null;
                 for (Enemy enemy : enemies) {
                     if (enemy.GetEnemyHP() > 0) {
@@ -192,6 +212,7 @@ public class GameScene extends AnchorPane {
                         double eX = enemy.getPositionX();
                         double eY = enemy.getPositionY();
 
+                        // calculate distance between player and enemy
                         double magnitude = Math.sqrt(Math.pow(eX - pX, 2) + Math.pow(eY - pY, 2));
                         if (magnitude < 45) {
                             targetEnemy = enemy;
@@ -200,9 +221,10 @@ public class GameScene extends AnchorPane {
                     }
                 }
 
+                // check if enemy is null
                 if (targetEnemy != null) {
-                    // Target enemy found within range
-                    System.out.println("Within bounds");
+                    // target enemy found within range and damage
+                    //System.out.println("Within bounds");
                     targetEnemy.EnemyDamage();
 
                     // Check if the enemy is dead after damage
@@ -213,22 +235,23 @@ public class GameScene extends AnchorPane {
                 } else {
                     System.out.println("No enemies within range.");
                 }
-            }
-        });
-    }
+            } // end of conditional if block
+        }); // end of eventHandler
+    } // end of listener method
 
+    // method to spawn a new enemy
     private void spawnNewEnemy(Player currPlr) {
-        // Increment wave counter and spawn a new enemy
+        // increment wave counter and spawn a new enemy
         waveCounter++;
         System.out.println("Wave: " + waveCounter); // debug
 
-        // Spawn enemies based on wave number
+        // spawn enemies based on wave number
         if (waveCounter >= 5) {
             for (int i = 0; i < 3; i++) {
                 Enemy e = createEnemy(currPlr, rand.nextInt(100, 600), rand.nextInt(100, 400));
                 game.addEntity(e);
 
-                // Add the enemy to the holderPane to make it independent of the player
+                // add the enemy to the holderPane
                 holderPane.getChildren().add(e);
             }
         } else if (waveCounter >= 10) {
@@ -236,19 +259,20 @@ public class GameScene extends AnchorPane {
                 Enemy e = createEnemy(currPlr, rand.nextInt(100, 600), rand.nextInt(100, 400));
                 game.addEntity(e);
 
-                // Add the enemy to the holderPane to make it independent of the player
+                // add the enemy to the holderPane
                 holderPane.getChildren().add(e);
             }
         } else {
             Enemy e = createEnemy(currPlr, rand.nextInt(100, 600), rand.nextInt(100, 400));
             game.addEntity(e);
-            // Add the enemy to the holderPane to make it independent of the player
+            // add the enemy to the holderPane
             holderPane.getChildren().add(e);
         }
-    }
+    } // end of spawnNewEnemy method
 
+    // method to return Enemy object
     private Enemy createEnemy(Player currPlr, int x, int y) {
         Enemy newEnemy = new Enemy(Main.playerVis, x, y, "player", currPlr, 5);
         return newEnemy;
     }
-}
+} // end of GameScene class

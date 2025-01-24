@@ -1,3 +1,9 @@
+/*
+Program name: CollisionDetection.java
+Date: Jan 24, 2025
+Purpose: Detect if collisions are happening
+ */
+
 package org.group.larryquestdefinitive.control;
 
 import org.group.larryquestdefinitive.entities.Direction;
@@ -6,12 +12,14 @@ import javafx.scene.layout.Pane;
 import javafx.geometry.Bounds;
 
 public class CollisionDetection {
+    // method to check if colliding or not
     public void checkCollision(Entity entity, Pane holderPane) {
         // Reset movement flags
         entity.setPossibleMove(Direction.ALL, true);
 
         Bounds entityBounds = entity.getCollider().localToScene(entity.getCollider().getBoundsInLocal());
 
+        // Loop through children
         for (var node : holderPane.getChildren()) {
             if (node instanceof Collider collider) {
                 Bounds colliderBounds = collider.localToScene(collider.getBoundsInLocal());
@@ -82,7 +90,7 @@ public class CollisionDetection {
                 }
             }
         }
-    }
+    } // end of checkCollision method
 
     // Helper method to check if the entity is adjacent to the collider in a specific direction
     private boolean isAdjacent(Bounds entityBounds, Bounds colliderBounds, Direction direction) {
@@ -99,4 +107,4 @@ public class CollisionDetection {
                 return false;
         }
     }
-}
+} // end of CollisionDetection class

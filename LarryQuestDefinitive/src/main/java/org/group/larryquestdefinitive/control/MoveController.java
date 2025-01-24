@@ -1,3 +1,9 @@
+/*
+Program name: MoveController.java
+Date: Jan 24, 2025
+Purpose: Class to control player movement
+ */
+
 package org.group.larryquestdefinitive.control;
 
 import org.group.larryquestdefinitive.entities.*;
@@ -7,21 +13,26 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
 public class MoveController {
+    // variables
     private Player player;
 
+    // booleans
     private boolean wPressed = false;
     private boolean aPressed = false;
     private boolean sPressed = false;
     private boolean dPressed = false;
     private boolean shiftPressed = false;
 
+    // constructor
     public MoveController(Player player){
         this.player = player;
     }
 
-    public void setupInput(AnchorPane scene /*Image Up1, Image Left1, Image Down1, Image Right1, Enemy enemy*/) {
+    // method to implement movement based on keyboard event
+    public void setupInput(AnchorPane scene) {
         scene.requestFocus();
 
+        // set player directions
         scene.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             switch (event.getCode()) {
                 case W:
@@ -61,6 +72,7 @@ public class MoveController {
             }
         });
 
+        // tell player to stop if any key is released
         scene.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
             switch (event.getCode()) {
                 case W:
@@ -95,5 +107,5 @@ public class MoveController {
                     break;
             }
         });
-    }
-}
+    } // end of setupInput method
+} // end of MoveController class

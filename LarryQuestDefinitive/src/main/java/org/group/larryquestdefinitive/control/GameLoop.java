@@ -1,3 +1,9 @@
+/*
+Program name: GameLoop.java
+Date: Jan 24, 2025
+Purpose: Main loop to control the game via updates
+ */
+
 package org.group.larryquestdefinitive.control;
 
 import java.util.ArrayList;
@@ -9,20 +15,20 @@ import org.group.larryquestdefinitive.scenes.GameOver;
 import javafx.animation.AnimationTimer;
 
 public class GameLoop extends AnimationTimer {
-
-
-
+    // loop variables
     private static final long NANOS_PER_FRAME = 1_000_000_000 / 60; // Nanoseconds per frame (60 FPS)
 
     private Game game;
     private ArrayList<Entity> entities;
     private long lastUpdate = 0; // Tracks the time of the last frame update
 
+    // constructor
     public GameLoop(Game game) {
         this.game = game;
         entities = game.getEntities();
     }
 
+    // overriding handle method
     @Override
     public void handle(long now) {
         // Limit the frame rate to 60 FPS
@@ -42,17 +48,13 @@ public class GameLoop extends AnimationTimer {
             if(game.getPlayer().currHealth <= 0){
                  end();
             }
-
-
-
-    //        System.out.println(game.getPlayer().getPositionX() + ", " + game.getPlayer().getPositionY());
-       //     System.out.println("Entity: "+ entities.get(0).getPositionX() + ", " + entities.get(0).getPositionY());
         }
-    }
+    } // end of handle method
 
+    // method to end loop
     public void end(){
         this.stop();
         game.getPlayer().currHealth = 10;
         game.GameOver();
     }
-}
+} // end of GameLoop class
